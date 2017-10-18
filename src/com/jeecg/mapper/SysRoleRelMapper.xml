@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeecg.dao.SysRoleRelDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.jeecg.entity.SysRoleRel" >
+	<result column="roleId" property="roleId"/>
+	<result column="objId" property="objId"/>
+	<result column="relType" property="relType"/>
+</resultMap>
+       
+<!-- sys_role_rel table all fields -->
+<sql id="Base_Column_List" >
+	 roleId,objId,relType
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="roleId != null" >
+	    and roleId =  #{roleId}
+	</if>
+	<if test="objId != null" >
+	    and objId =  #{objId}
+	</if>
+	<if test="relType != null" >
+	    and relType =  #{relType}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into sys_role_rel(roleId,objId,relType)
+ values(#{roleId},#{objId},#{relType})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update sys_role_rel set objId=#{objId},relType=#{relType} where roleId=#{roleId}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update sys_role_rel set 
+	<trim  suffixOverrides="," >
+	<if test="objId != null  ">
+		objId=#{objId},
+	</if>
+	<if test="relType != null  ">
+		relType=#{relType},
+	</if>
+	</trim> where roleId=#{roleId}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	from sys_role_rel where roleId = #{roleId}
+</delete>
+ 
+ 
+<!-- 删除记录 -->
+<delete id="deleteByRoleId" parameterType="Object">
+	delete 	from sys_role_rel where roleId = #{roleId}
+	<if test="relType != null" >
+		and relType =  #{relType}
+	</if>
+</delete>
+ 
+ 
+<!-- 删除记录 -->
+<delete id="deleteByObjId" parameterType="Object">
+	delete 	from sys_role_rel where objId = #{objId}
+	<if test="relType != null" >
+		and relType =  #{relType}
+	</if>
+</delete>
+
+<!-- 删除记录 -->
+<select id="queryByRoleId" resultMap="BaseResultMap"  parameterType="Object">
+	select
+	<include refid="Base_Column_List"/>
+	from sys_role_rel where roleId = #{roleId}
+	<if test="relType != null" >
+		and relType =  #{relType}
+	</if>
+</select>
+ 
+ 
+<!-- 删除记录 -->
+<select id="queryByObjId" resultMap="BaseResultMap" parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from sys_role_rel where objId = #{objId}
+	<if test="relType != null" >
+		and relType =  #{relType}
+	</if>
+</select>
+ 
+<!-- 根据id查询 角色关联 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from sys_role_rel where roleId = #{roleId}
+</select>
+
+<!-- 角色关联 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from sys_role_rel 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询角色关联列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from sys_role_rel 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

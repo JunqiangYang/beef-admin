@@ -1,0 +1,25 @@
+环境搭建步骤：
+
+1.创建一个utf-8的数据库，数据库名jeecgmybatis
+2.执行脚本jeecgmybatis.sql，初始化数据库
+3.项目导入myeclipse工程
+4.启动项目
+      访问：http://localhost:8080/jeecg-mybatis-framework
+5.代码生成器路径
+  /jeecg-mybatis-framework/src/com/code/CodeUtil.java      
+  
+  
+  
+  
+简要说明
+jeecg-mybatis-framework,采用SpringMVC+Mybatis等主流框架
+支持数据库: Mysql,Oracle10g
+前端:使用Jquery和Easyui技术.JS封装简洁,操作简单.
+权限:对菜单,按钮控制.根据登陆用户权限展示拥有的菜单和按钮.
+拦截:对所有无权限URL进行拦截,防止手动发送HTTP请求,确保系统全性.
+代码生成：根据表生成对应的Bean,Service,Dao,Action,XML,JSP等,增删改查功能直接使用,实现了快速开发
+
+
+技术交流群:106259349, 106838471, 289782002
+邮箱：scott@jeecg.org
+官网：http://www.jeecg.org  

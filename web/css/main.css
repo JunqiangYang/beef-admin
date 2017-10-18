@@ -1,0 +1,9 @@
+.ui-header{background: url("../images/layout-browser-hd-bg.gif") repeat-x center;font-family: 'lucida grande',tahoma,arial,sans-serif;color: white;}
+.ui-header h1 {background: url("../images/logo/20.jpg") no-repeat left;font-size: 17px;color: white;font-weight: normal;padding: 5px 10px;float: left;font-weight: bold;margin-left: 10px; text-indent: 20px}
+
+.ui-login{float: right;padding: 10px}
+.ui-login a{color:#D7E8F7}
+.ui-login .ui-login-bar{text-align: right;}
+
+.menu-item{display:block;color:black;text-decoration: none;	border-bottom :1px dotted #D8D8D8;padding:5px 5px 5px 15px;}
+.menu-item:hover{background: #E0ECFF;}

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeecg.dao.SysRoleDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.jeecg.entity.SysRole" >
+	<result column="id" property="id"/>
+	<result column="roleName" property="roleName"/>
+	<result column="createTime" property="createTime"/>
+	<result column="createBy" property="createBy"/>
+	<result column="updateTime" property="updateTime"/>
+	<result column="updateBy" property="updateBy"/>
+	<result column="state" property="state"/>
+	<result column="descr" property="descr"/>
+</resultMap>
+       
+<!-- sys_role table all fields -->
+<sql id="Base_Column_List" >
+	 id,roleName,createTime,createBy,updateTime,updateBy,state,descr
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id =  #{id}
+	</if>
+	 <if test="roleName != null and roleName != ''" >
+	    and roleName like CONCAT('%', #{roleName}, '%')
+	</if>
+	<if test="createTime != null" >
+	    and createTime =  #{createTime}
+	</if>
+	<if test="createBy != null" >
+	    and createBy =  #{createBy}
+	</if>
+	<if test="updateTime != null" >
+	    and updateTime =  #{updateTime}
+	</if>
+	<if test="updateBy != null" >
+	    and updateBy =  #{updateBy}
+	</if>
+	<if test="state != null" >
+	    and state =  #{state}
+	</if>
+	 	<if test="descr != null and descr != ''" >
+	    and descr =  #{descr}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into sys_role(id,roleName,createTime,createBy,updateTime,updateBy,state,descr)
+ values(#{id},#{roleName},now(),#{createBy},now(),#{updateBy},#{state},#{descr})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update sys_role set roleName=#{roleName},createBy=#{createBy},updateTime=now(),updateBy=#{updateBy},state=#{state},descr=#{descr} where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update sys_role set 
+	<trim  suffixOverrides="," >
+	<if test="roleName != null  and roleName != '' ">
+		roleName=#{roleName},
+	</if>
+	<if test="createTime != null  ">
+		createTime=#{createTime},
+	</if>
+	<if test="createBy != null  ">
+		createBy=#{createBy},
+	</if>
+	<if test="updateTime != null  ">
+		updateTime=#{updateTime},
+	</if>
+	<if test="updateBy != null  ">
+		updateBy=#{updateBy},
+	</if>
+	<if test="state != null  ">
+		state=#{state},
+	</if>
+	<if test="descr != null  and descr != '' ">
+		descr=#{descr},
+	</if>
+	</trim> where id=#{id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from sys_role where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 系统角色 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from sys_role where id = #{id}
+</select>
+
+<!-- 系统角色 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from sys_role 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询系统角色列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from sys_role 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+
+	
+<!-- 查询所有角色列表 -->
+<select id="queryAllList" resultMap="BaseResultMap"  parameterType="Object">
+	select  <include refid="Base_Column_List"/>
+	from sys_role where state = 0 
+</select>
+
+<!-- 查询所有角色列表 -->
+<select id="queryByUserid" resultMap="BaseResultMap"  parameterType="Object">
+	select  <include refid="Base_Column_List"/>
+	from sys_role r where state = 0 
+	AND EXISTS (
+		SELECT 1 FROM  sys_role_rel rel WHERE rel.roleId = r.id  AND rel.relType = 1 AND rel.objId = #{userid}
+	)
+</select>
+
+
+</mapper>   

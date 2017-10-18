@@ -1,0 +1,24 @@
+*{font-size:12px;}
+body {font-family:helvetica,tahoma,verdana,sans-serif;padding:0px;font-size:13px;margin:0;}
+form,h1{margin: 0; padding: 0;}
+h2 {font-size:18px;color:#333;font-weight:bold;margin:0;margin-bottom:15px;}
+.warp{padding: 10px;}
+a{text-decoration: none;color:#2786D6;}
+.hidden { display: none;}
+.show { display: block;}
+.red{color: #FF1E00!important;}
+.green{color: #090!important;}
+.orange{color: #F60!important;}
+.datagrid-row-selected a{color: white;}
+
+.ui-form{  margin:0;  padding:10px 15px;  }  
+.ftitle{  font-size:14px;  font-weight:bold;  padding:5px 0;  margin-bottom:10px;  border-bottom:1px solid #ccc;  }  
+.fitem{  margin-bottom:5px;  }  
+.fitem textarea,.fitem label{vertical-align: middle;}
+.fitem label{  display:inline-block;  width:100px;  text-align: right;}
+
+.ui-fields{vertical-align: middle;display: inline-block;float: left;margin: 0;padding: 5px}
+.ui-label{vertical-align: middle;padding-right: 3px}
+.ui-text{vertical-align: middle;border: 1px solid #A4BED4;font-size: 12px;line-height: 20px;height: 20px;padding: 0px;_height: 18px;_line-height: 18px;}
+.ui-search-panel{padding: 10px;border-bottom: 1px solid #D4D4D4;}
+
