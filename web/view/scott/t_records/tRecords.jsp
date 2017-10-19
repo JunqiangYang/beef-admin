@@ -73,9 +73,12 @@
 						</select>
 						<label>型号:</label>
 						<select class="easyui-combobox" name="goodskindid" id="formgoodskindid" style="width: 100px"></select>
+						<label>价格:</label>
+						<input name="price" type="text" class="easyui-numberbox"  data-options="required:true" missingMessage="请填价格" style="width: 50px">
 						<label>件数:</label>
-						<input name="nums" type="text" maxlength="" class="easyui-numberbox"  data-options="required:true" missingMessage="请填写件数" style="width: 100px">
-						<%--<label>状态</label>--%>
+						<input name="nums" type="text" maxlength="" class="easyui-numberbox"  data-options="required:true" missingMessage="请填写件数" style="width: 50px">
+
+					<%--<label>状态</label>--%>
 						<%--<input name="status" type="text" maxlength="" class="easyui-numberbox"  missingMessage="请填写状态(暂时无)" style="width: 30px">--%>
 					</div>
 
