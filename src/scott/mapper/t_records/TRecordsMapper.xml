@@ -11,6 +11,7 @@
 	<result column="createtime" property="createtime"/>
 	<result column="goodskindid" property="goodskindid"/>
 	<result column="nums" property="nums"/>
+	<result column="price" property="price"/>
 	<result column="peopleid" property="peopleid"/>
 	<result column="status" property="status"/>
 	<result column="details" property="details"/>
@@ -22,7 +23,7 @@
        
 <!-- t_records table all fields -->
 <sql id="Base_Column_List" >
-	 r.id,r.opertype,r.warehouseid,r.createtime,r.goodskindid,r.nums,r.peopleid,r.status,r.details,r.remark,w.warehouseName,c.name,g.gooddsKindName
+	 r.id,r.opertype,r.warehouseid,r.createtime,r.goodskindid,r.nums,r.price,r.peopleid,r.status,r.details,r.remark,w.warehouseName,c.name,g.gooddsKindName
 </sql>
    
    
