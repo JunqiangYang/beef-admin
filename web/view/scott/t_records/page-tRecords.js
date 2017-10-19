@@ -36,13 +36,12 @@ jeecg.tRecords = function(){
 	// 输入时触发
 	var  new_4_5_div_input_fire = function (str) {
         var weightformat = $("#weightformat").val() ;
-        console.info(weightformat);
+        console.info(parseInt(weightformat));
         var regex = '' ;
         if(parseInt(weightformat) == 0){
-            regex = /^([0-9][\d]{5}|0)?$/ ;
-        }
-        if(parseInt(weightformat) == 1){
-            regex =/^([0-9][\d]{4}|0)?$/ ;
+            regex = /^\d{5}$/;
+        }else{
+            regex =/^\d{4}$/;
         }
         console.log("regex:"+str+","+regex.test(str));
     };
