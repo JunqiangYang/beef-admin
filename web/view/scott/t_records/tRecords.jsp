@@ -81,8 +81,8 @@
 
 					<div style="margin-top: 10px; padding-top: 5px;  border-top:1px solid #ccc; ">
 						<label>重量格式:</label>
-							<select id="moneyformat" name="moneyformat" style="width: 100px">
-								<option value="0" selected="selected">五位数</option>
+							<select id="weightformat" name="weightformat" style="width: 100px">
+								<option value="0">五位数</option>
 								<option value="1">四位数</option>
 							</select>
 						<br/><br/>
