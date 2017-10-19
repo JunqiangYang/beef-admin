@@ -73,7 +73,7 @@ where 1=1
 
 <!-- 根据id，修改记录-->  
  <update id="update" parameterType="Object" >
-  update t_records set opertype=#{opertype},warehouseid=#{warehouseid},goodskindid=#{goodskindid},nums=#{nums},peopleid=#{peopleid},status=#{status},details=#{details},remark=#{remark} where id=#{id}
+  update t_records set opertype=#{opertype},warehouseid=#{warehouseid},goodskindid=#{goodskindid},nums=#{nums},price=#{price},peopleid=#{peopleid},status=#{status},details=#{details},remark=#{remark} where id=#{id}
  </update>
  
  <!-- 修改记录，只修改只不为空的字段 -->

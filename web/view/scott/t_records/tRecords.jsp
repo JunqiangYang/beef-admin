@@ -6,10 +6,13 @@
   </head>
   <style>
 	  .blockdiv{
-		  width: 150px;padding: 5px; margin-left: 3px; margin-right: 3px;float:left; border: 1px solid red;
+		  width: 60px;padding-top: 5px; margin-left: 5px; margin-right: 5px;float:left;text-align: center ;
 	  }
 	  .blockdiv-input{
-		  width: 100%;margin-bottom :5px;
+		  width: 100%;border: 1px solid black;padding-top: 3px;margin: 1px;
+	  }
+	  .redborder{
+		  border: 1px solid red;
 	  }
 
 
@@ -52,31 +55,31 @@
 	 </div>
 	 
      <!-- Edit Win&Form -->
-     <div id="edit-win" class="easyui-dialog" title="码单" data-options="closed:true,iconCls:'icon-save',modal:true" style="width:910px; height: 600px;">
+     <div id="edit-win" class="easyui-dialog" title="码单" data-options="closed:true,iconCls:'icon-save',modal:true" style=" margin-top: 5px; width:470px; height: 600px;">
      	<form id="editForm" class="ui-form" method="post">  
      		 <input class="hidden" name="id" >
      		 <div class="ui-edit">
 		     	   <div class="ftitle"></div>
 					<div>
 						<label>类型:</label>
-						<select name="opertype" style="width: 100px">
+						<select name="opertype" style="width: 80px">
 							<option value="0" selected="selected">入库</option>
 							<option value="1">出库</option>
 						</select>
 						<label>仓库:</label>
-						<select class="easyui-combobox" name="warehouseid" id="formwarehouseid" style="width: 100px"></select>
+						<select class="easyui-combobox" name="warehouseid" id="formwarehouseid" style="width: 80px"></select>
 						<label>时间:</label>
 						<input name="createtime" type="text" maxlength="" class="easyui-datetimebox" missingMessage="请填写创建时间">
 						<br/>
 						<label>买家:</label>
-						<select class="easyui-combobox" name="peopleid" id="formpeopleid" style="width: 100px">
+						<select class="easyui-combobox" name="peopleid" id="formpeopleid" style="width: 80px">
 						</select>
 						<label>型号:</label>
-						<select class="easyui-combobox" name="goodskindid" id="formgoodskindid" style="width: 100px"></select>
+						<select class="easyui-combobox" name="goodskindid" id="formgoodskindid" style="width: 80px"></select>
 						<label>价格:</label>
-						<input name="price" type="text" class="easyui-numberbox"  data-options="required:true" missingMessage="请填价格" style="width: 50px">
+						<input name="price" type="text" class="easyui-textbox"  data-options="required:true" missingMessage="请填价格" style="width: 55px">
 						<label>件数:</label>
-						<input name="nums" type="text" maxlength="" class="easyui-numberbox"  data-options="required:true" missingMessage="请填写件数" style="width: 50px">
+						<input name="nums" type="text" maxlength="" class="easyui-numberbox"  data-options="required:true" missingMessage="请填写件数" style="width: 55px">
 
 					<%--<label>状态</label>--%>
 						<%--<input name="status" type="text" maxlength="" class="easyui-numberbox"  missingMessage="请填写状态(暂时无)" style="width: 30px">--%>
@@ -84,32 +87,18 @@
 
 					<div style="margin-top: 10px; padding-top: 5px;  border-top:1px solid #ccc; ">
 						<label>重量格式:</label>
-							<select id="weightformat" name="weightformat" style="width: 100px">
+							<select id="weightformat" name="weightformat" style="width: 80px">
 								<option value="0">五位数</option>
 								<option value="1">四位数</option>
 							</select>
 						<br/><br/>
-						<input id="details" name="details" type="hidden" >
-						<div id="divlistblock" style=" width: 100%; height: 600px ;">
-
-							<div name="divnuminputblock" class="blockdiv">
-								<input name="numinput" type="text" class="blockdiv-input">
-								<input name="numinput" type="text" class="blockdiv-input">
-								<input name="numinput" type="text" class="blockdiv-input">
-								<input name="numinput" type="text" class="blockdiv-input">
-								<input name="numinput" type="text" class="blockdiv-input">
-							</div>
-
-
-
-
+						<input name="details" id="details" type="hidden" >
+						<div id="divlistblock" style=" width: 88%; text-align: center; margin: 0 auto; "></div>
+						<div style="clear: both">
+							<label>备注:</label>
+							<input name="remark" id="remark" type="hidden" >
+							<textarea id="remarktextarea" style="width: 100%;height: 50px " ></textarea>
 						</div>
-					</div>
-					<div>
-						<label>备注</label><br/>
-						<input name="remark" type="text" maxlength="500" class="easyui-validatebox" data-options="" missingMessage="请填写备注">
-						<textarea style="width: 100%;height: 50px " ></textarea>
-
 					</div>
   			</div>
      	</form>

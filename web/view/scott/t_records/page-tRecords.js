@@ -7,8 +7,15 @@ jeecg.tRecords = function(){
 	var goodskindlist = null ;
 	var warehouselist = null ;
 	// 创建
-	var new_4_5_div = function () {
-	    var str = $('#details').val().split(",") ;
+	var new_4_5_div = function (str) {
+	    //var str = $('#details').val();
+	    var arr = new Array(100);
+        for(var j = 0,len=arr.length; j<len; j++) { arr[j] = ''; }
+	    if(str != null && str.trim().length != 0 ){
+            var a = str.split(",");
+            for(var j = 0,len=a.length; j<len; j++) { arr[j] = a[j]; }
+        }
+        console.info(arr);
         var n = 0 ;
         var html = '' ;
         for (var i=0;i<4;i++)
@@ -16,11 +23,11 @@ jeecg.tRecords = function(){
             for (var j=0;j<5;j++)
             {
                 html += '<div class="blockdiv">' ;
-                html += '<input name="numinput" type="text" class="blockdiv-input" value="'+(n++)+'" >';
-                html += '<input name="numinput" type="text" class="blockdiv-input" value="'+(n++)+'" >';
-                html += '<input name="numinput" type="text" class="blockdiv-input" value="'+(n++)+'" >';
-                html += '<input name="numinput" type="text" class="blockdiv-input" value="'+(n++)+'" >';
-                html += '<input name="numinput" type="text" class="blockdiv-input" value="'+(n++)+'" >';
+                html += '<input name="numinput" type="text" value="'+(arr[n++])+'" >';
+                html += '<input name="numinput" type="text" value="'+(arr[n++])+'" >';
+                html += '<input name="numinput" type="text" value="'+(arr[n++])+'" >';
+                html += '<input name="numinput" type="text" value="'+(arr[n++])+'" >';
+                html += '<input name="numinput" type="text" value="'+(arr[n++])+'" >';
                 html += '</div>';
             }
         }
@@ -29,19 +36,19 @@ jeecg.tRecords = function(){
         $("input[name='numinput']").addClass("blockdiv-input");
         $("input[name='numinput']").each(function () {
             $(this).on('keyup paste',function() {
-                new_4_5_div_input_fire($(this).val())
+                var str = $(this).val() ;
+                var weightformat = $("#weightformat").val() ;
+                var regex = /^\d{5}$/ ;
+                if(parseInt(weightformat) == 1){
+                    regex =/^\d{4}$/;
+                }
+                if(regex.test(str) || str.trim().length ==0){
+                    $(this).removeClass("redborder");
+                }else{
+                    $(this).addClass("redborder");
+                }
             });
         })
-    };
-	// 输入时触发
-	var  new_4_5_div_input_fire = function (str) {
-        var weightformat = $("#weightformat").val() ;
-        console.info(parseInt(weightformat));
-        var regex = /^\d{5}$/ ;
-        if(parseInt(weightformat) == 1){
-            regex =/^\d{4}$/;
-        }
-        console.log("regex:"+str+","+regex.test(str));
     };
 
     var _this = {
@@ -65,7 +72,7 @@ jeecg.tRecords = function(){
                         textField:'warehousename'
                     });
                     // 创建4行5列 矩阵框
-                    new_4_5_div();
+                    new_4_5_div('');
 
 				},
 				edit:function(){
@@ -84,10 +91,37 @@ jeecg.tRecords = function(){
                         valueField:'id',
                         textField:'warehousename'
                     });
-					_box.handler.edit(function (result) {});
-                    // 创建4行5列 矩阵框
-                    new_4_5_div();
-				}
+					_box.handler.edit(function (result) {
+                        $("#remarktextarea").val($("#remark").val());
+                        // 创建4行5列 矩阵框
+                        new_4_5_div(result.data.details);
+                    });
+				},
+                save:function () {
+                    var check = true ;
+				    var deatils = '' ;
+                    $("input[name='numinput']").each(function () {
+                        var str = $(this).val() ;
+                        var weightformat = $("#weightformat").val() ;
+                        var regex = /^\d{5}$/ ;
+                        if(parseInt(weightformat) == 1){
+                            regex =/^\d{4}$/;
+                        }
+                        if(regex.test(str) || str.trim().length ==0){
+                            $(this).removeClass("redborder");
+                            if(str.trim().length>0) deatils += (str+",") ;
+                        }else{
+                            $(this).addClass("redborder");
+                            check = false ;
+                        }
+                    });
+                    if(!check) return;
+				    console.info(deatils);
+                    if(deatils.length>0) deatils=deatils.substring(0,deatils.length-1);
+                    $("#details").val(deatils);
+                    $("#remark").val($("#remarktextarea").val());
+                    _box.handler.save();
+                }
 			},
   			dataGrid:{
   				title:'进出库记录管理',
