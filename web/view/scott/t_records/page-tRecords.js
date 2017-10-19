@@ -35,16 +35,15 @@ jeecg.tRecords = function(){
     };
 	// 输入时触发
 	var  new_4_5_div_input_fire = function (str) {
-        console.log(str);
         var moneyformat = $("#moneyformat").val() ;
         var regex = '' ;
         if(parseInt(moneyformat) == 0){
-            regex = "555.55";
+            regex = /^([1-9][\d]{5}|0)?$/ ;
         }
         if(parseInt(moneyformat) == 1){
-            regex = "44.44";
+            regex =/^([1-9][\d]{4}|0)?$/ ;
         }
-        console.log("regex:"+regex+','+str);
+        console.log("regex:"+str+","+regex.test(str));
     };
 
     var _this = {
