@@ -37,10 +37,8 @@ jeecg.tRecords = function(){
 	var  new_4_5_div_input_fire = function (str) {
         var weightformat = $("#weightformat").val() ;
         console.info(parseInt(weightformat));
-        var regex = '' ;
-        if(parseInt(weightformat) == 0){
-            regex = /^\d{5}$/;
-        }else{
+        var regex = /^\d{5}$/ ;
+        if(parseInt(weightformat) == 1){
             regex =/^\d{4}$/;
         }
         console.log("regex:"+str+","+regex.test(str));
