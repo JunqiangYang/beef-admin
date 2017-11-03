@@ -133,7 +133,7 @@ where 1=1   and deleted =  0
 	select 
 	<include refid="Base_Column_List"/>
 	,(SELECT COUNT(*) FROM sys_menu c  WHERE c.parentId = m.id and deleted = 0) AS subCount
-	from sys_menu m
+	from sys_menu m ORDER BY m.rank asc
 	<include refid="Example_Where_Clause"/>
 	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
       ${pager.orderCondition}
@@ -147,7 +147,7 @@ where 1=1   and deleted =  0
 	
 <!-- 查询所有有效系统菜单列表 -->
 <select id="queryByAll" resultMap="BaseResultMap"  parameterType="Object">
-	select  id,name,url,parentId,actions from sys_menu deleted= 0 order by rank desc
+	select  id,name,url,parentId,actions from sys_menu deleted= 0 order by rank asc
 </select>
 
 <!-- 获取顶级菜单 -->
@@ -162,7 +162,7 @@ where 1=1   and deleted =  0
 
 <!-- 获取子菜单-->
 <select id="getChildMenu"  resultMap="BaseResultMap" parameterType="Object">
-	select id,name,url,parentId,actions from sys_menu where deleted= 0 and parentId is not null
+	select id,name,url,parentId,actions from sys_menu where deleted= 0 and parentId is not null  order by rank asc
 </select>
 
 <!-- 根据角色Id获取菜单（不需要父菜单） -->
@@ -171,7 +171,7 @@ where 1=1   and deleted =  0
 	AND EXISTS (
 		 SELECT * FROM sys_role_rel r WHERE r.objId = m.id AND relType = 0
 		 AND r.roleId = #{roleId}
-	)
+	)  order by m.rank asc
 </select>
 
 <!-- 根据用户id查询父菜单菜单 -->
@@ -184,7 +184,7 @@ where 1=1   and deleted =  0
 		 AND EXISTS ( 
 			SELECT 1 FROM sys_role_rel u WHERE u.roleId = r.roleId  AND u.relType = 1 AND u.objId = #{userId}
 		 )
-	)
+	)  order by m.rank asc
 </select>
 
 
@@ -198,7 +198,7 @@ where 1=1   and deleted =  0
 		 AND EXISTS ( 
 			SELECT 1 FROM sys_role_rel u WHERE u.roleId = r.roleId  AND u.relType = 1 AND u.objId = #{userId}
 		 )
-	)
+	)  order by m.rank asc
 </select>
 
 
