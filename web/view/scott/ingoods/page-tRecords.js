@@ -80,5 +80,9 @@ jeecg.tRecords = function(){
 }();
 
 $(function(){
-	jeecg.tRecords.init();
+
+
+
+
+
 });
