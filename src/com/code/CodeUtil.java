@@ -32,9 +32,9 @@ public class CodeUtil {
 
 	public static void main(String[] args) {
 		 /** 此处修改成你的 表名 和 中文注释***/
-		 String tableName="t_goods_kind"; //
-		 String codeName ="tGoodsKind";//中文注释  当然你用英文也是可以的
-		 String entityPackage ="goodsKind";//实体包
+		 String tableName="t_records"; //
+		 String codeName ="OutGoods";//中文注释  当然你用英文也是可以的
+		 String entityPackage ="outgoods";//实体包
 		 String keyType = FtlDef.KEY_TYPE_01;//主键生成方式 01:UUID  02:自增
 		CodeGenerateFactory.codeGenerate(tableName, codeName,entityPackage,keyType);
 	}
