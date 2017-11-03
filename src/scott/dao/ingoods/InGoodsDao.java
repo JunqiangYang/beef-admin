@@ -1,4 +1,4 @@
-package scott.dao.t_records;
+package scott.dao.ingoods;
 
 
 import com.base.dao.BaseDao;
@@ -10,7 +10,7 @@ import com.base.dao.BaseDao;
  * <b>日期：</b> Feb 2, 2013 <br>
  * <b>版权所有：<b>版权所有(C) 2013，www.jeecg.org<br>
  */
-public interface TRecordsDao<T> extends BaseDao<T> {
+public interface InGoodsDao<T> extends BaseDao<T> {
 	
 	
 }
