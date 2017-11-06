@@ -69,7 +69,7 @@
 						<label>仓库:</label>
 						<select class="easyui-combobox" name="warehouseid" id="formwarehouseid" style="width: 80px"></select>
 						<label>时间:</label>
-						<input name="createtime" type="text" maxlength="" class="easyui-datetimebox" missingMessage="请填写创建时间">
+						<%--<input name="createtime" type="text" maxlength="" class="easyui-datetimebox" missingMessage="请填写创建时间">--%>
 						<br/>
 						<label>买家:</label>
 						<select class="easyui-combobox" name="peopleid" id="formpeopleid" style="width: 80px">

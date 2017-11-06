@@ -184,7 +184,7 @@ var YDataGrid = function(config){
 					 };
 		var bar_edit = {
 							id:'btnedit',
-							text:'修改',
+							text:'详情',
 							iconCls:'icon-edit',
 							btnType:'edit',
 							handler: Events.edit

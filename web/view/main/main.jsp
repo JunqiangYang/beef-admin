@@ -11,7 +11,7 @@
   </head>
   <body class="easyui-layout">
  	<div class="ui-header" data-options="region:'north',split:true,border:false" style="height:40px;overflow: hidden;">
- 	<h1>演示系统</h1>
+ 	<h1>仓库管理系统</h1>
  	<div  class="ui-login">
  		<div class="ui-login-info">
 	 		欢迎 <span class="orange">${user.nickName}</span> 第[<span class="orange">${user.loginCount}</span>]次登录 
