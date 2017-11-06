@@ -51,6 +51,40 @@ jeecg.tRecords = function(){
         })
     };
 
+    var new_1_1_div = function (str) {
+        //var str = $('#details').val();
+        var arr = new Array(100);
+        for(var j = 0,len=arr.length; j<len; j++) { arr[j] = ''; }
+        if(str != null && str.trim().length != 0 ){
+            var a = str.split(",");
+            for(var j = 0,len=a.length; j<len; j++) { arr[j] = a[j]; }
+        }
+        console.info(arr);
+        var n = 0 ;
+        var html = '' ;
+        html += '<div class="blockdiv">' ;
+        html += '<input name="numinput" type="text" value="'+(arr[n++])+'" >';
+        html += '</div>';
+        $('#divlistblock').html(html);
+        $("div[name=divnuminputblock]").addClass("blockdiv");
+        $("input[name='numinput']").addClass("blockdiv-input");
+        $("input[name='numinput']").each(function () {
+            $(this).on('keyup paste',function() {
+                var str = $(this).val() ;
+                var weightformat = $("#weightformat").val() ;
+                var regex = /^\d{5}$/ ;
+                if(parseInt(weightformat) == 1){
+                    regex =/^\d{4}$/;
+                }
+                if(regex.test(str) || str.trim().length ==0){
+                    $(this).removeClass("redborder");
+                }else{
+                    $(this).addClass("redborder");
+                }
+            });
+        })
+    };
+
     var _this = {
 		config:{
             action:{

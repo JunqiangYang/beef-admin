@@ -25,14 +25,15 @@
 			<label class="ui-label">仓库:</label>
 			<select  class="easyui-combobox"   name="warehouseid" id="warehouseid"  style="width:100px;">
 			</select>
+			<label class="ui-label">型号:</label>
+			<select  class="easyui-combobox"  name="goodskindid" id="goodskindid" style="width:100px;" >
+			</select>
 			<label class="ui-label">时间阶段:</label>
 			<input name="begintime" id="begintime" type="text" maxlength="" class="easyui-datetimebox" >
 			-
 			<input name="endtime" id="endtime" type="text" maxlength="" class="easyui-datetimebox" >
 
-			<label class="ui-label">型号:</label>
-			<select  class="easyui-combobox"  name="goodskindid" id="goodskindid" style="width:100px;" >
-			</select>
+
 	    </p>
 	    <a href="#" id="btn-search" class="easyui-linkbutton" iconCls="icon-search">查询</a>
       </form>  
@@ -51,11 +52,6 @@
      		 <div class="ui-edit">
 		     	   <div class="ftitle"></div>
 					<div>
-						<label>类型:</label>
-						<select name="opertype" style="width: 80px">
-							<option value="0" selected="selected">入库</option>
-							<option value="1">出库</option>
-						</select>
 						<label>仓库:</label>
 						<select class="easyui-combobox" name="warehouseid" id="formwarehouseid" style="width: 80px"></select>
 						<label>时间:</label>
@@ -75,7 +71,7 @@
 						<%--<input name="status" type="text" maxlength="" class="easyui-numberbox"  missingMessage="请填写状态(暂时无)" style="width: 30px">--%>
 					</div>
 
-					<div style="margin-top: 10px; padding-top: 5px;  border-top:1px solid #ccc; ">
+					<div id="weightinoutbox" style="margin-top: 10px; padding-top: 5px;  border-top:1px solid #ccc; ">
 						<label>重量格式:</label>
 							<select id="weightformat" name="weightformat" style="width: 80px">
 								<option value="0">五位数</option>
