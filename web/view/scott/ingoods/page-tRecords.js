@@ -87,9 +87,6 @@ jeecg.tRecords = function(){
 
     var _this = {
 		config:{
-            action:{
-
-            },
 			event:{
 				add:function(){
                     _box.handler.add();
@@ -109,7 +106,7 @@ jeecg.tRecords = function(){
                         textField:'warehousename'
                     });
                     // 创建4行5列 矩阵框
-                    new_4_5_div('');
+                    //new_4_5_div('');
 
 				},
 				edit:function(){
@@ -131,7 +128,13 @@ jeecg.tRecords = function(){
 					_box.handler.edit(function (result) {
                         $("#remarktextarea").val($("#remark").val());
                         // 创建4行5列 矩阵框
-                        new_4_5_div(result.data.details);
+                        var isfixedweight  = parseInt($('#formgoodskindid').combobox('getValue'));
+                        if(obj.isfixedweight != undefined && parseInt(obj.id) == parseInt(n) && obj.isfixedweight ==0 ){
+                            new_1_1_div(result.data.details);
+                        }else{
+                            // 创建4行5列 矩阵框
+                            new_4_5_div(result.data.details);
+                        }
                     });
 				},
                 save:function () {
@@ -252,6 +255,20 @@ jeecg.tRecords = function(){
                 }
                 jeecg.closeProgress();
             });
+            $("#formgoodskindid").combobox({
+                onChange: function (n,o) {
+                    console.info(n);
+                    for (let obj of goodskindlist) {
+                        if(obj.isfixedweight != undefined && parseInt(obj.id) == parseInt(n) && obj.isfixedweight ==0 ){
+                            new_4_5_div('');
+                            return ;
+                        }
+                    }
+                    new_1_1_div('');
+                }
+            });
+
+
 
 		}
 	}
