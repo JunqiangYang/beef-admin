@@ -17,7 +17,7 @@ jeecg.tGoodsKind = function(){
   				title:'型号管理',
 	   			url:'dataList.do',
 	   			columns:[[
-					{field:'id',checkbox:true},
+					{field:'id',checkbox:false},
 					{field:'gooddskindname',title:'型号名称',align:'center',sortable:true,
 							formatter:function(value,row,index){
 								return row.gooddskindname;

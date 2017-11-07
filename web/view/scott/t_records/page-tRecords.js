@@ -127,7 +127,7 @@ jeecg.tRecords = function(){
   				title:'进出库记录管理',
 	   			url:'dataList.do',
 	   			columns:[[
-					{field:'id',checkbox:true},
+					{field:'id',checkbox:false},
 					{field:'opertype',title:'进出库',align:'center',sortable:true,
 							formatter:function(value,row,index){
   								if(row.opertype == 0){

@@ -17,7 +17,7 @@ jeecg.tWarehouse = function(){
   				title:'仓库管理',
 	   			url:'dataList.do',
 	   			columns:[[
-					{field:'id',checkbox:true},
+					{field:'id',checkbox:false},
 					{field:'warehousename',title:'仓库名称',align:'center',sortable:true,
 							formatter:function(value,row,index){
 								return row.warehousename;
