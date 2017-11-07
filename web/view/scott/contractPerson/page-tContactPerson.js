@@ -17,7 +17,7 @@ jeecg.tContactPerson = function(){
   				title:'联系人记录管理',
 	   			url:'dataList.do',
 	   			columns:[[
-					{field:'id',checkbox:false},
+					{field:'id',checkbox:true},
 					{field:'name',title:'姓名',align:'center',sortable:true,
 							formatter:function(value,row,index){
 								return row.name;

@@ -167,7 +167,7 @@ jeecg.tRecords = function(){
   				title:'进库记录显示',
 	   			url:'dataList.do',
 	   			columns:[[
-					{field:'id',checkbox:false},
+					{field:'id',checkbox:true},
 
 					{field:'warehouseName',title:'仓库',align:'center',sortable:true,
 							formatter:function(value,row,index){
