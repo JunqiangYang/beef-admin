@@ -34,35 +34,32 @@
 <!-- 查询条件 -->
 <sql id="Example_Where_Clause">
 where 1=1 and r.opertype=0 and r.status &lt;2
-<trim  suffixOverrides="," >
-	<if test="id != null and id != ''" >
-	    and r.id =  #{id}
-	</if>
-	<if test="warehouseid != null and warehouseid != ''" >
-	    and r.warehouseid =  #{warehouseid}
-	</if>
-	<if test="createtime != null and createtime != ''" >
-	    and r.createtime =  #{createtime}
-	</if>
-	<if test="goodskindid != null and goodskindid != ''" >
-	    and r.goodskindid =  #{goodskindid}
-	</if>
-	<if test="nums != null and nums != ''" >
-	    and r.nums =  #{nums}
-	</if>
-	<if test="peopleid != null and peopleid != ''" >
-	    and r.peopleid =  #{peopleid}
-	</if>
-	<if test="details != null and details != ''" >
-	    and r.details =  #{details}
-	</if>
-	<if test="remark != null and remark != ''" >
-	    and r.remark =  #{remark}
-	</if>
-	<if test="price != null and price != ''" >
-	    and r.price =  #{price}
-	</if>
-</trim>
+	<trim  suffixOverrides="," >
+		<if test="id != null and id != ''" >
+			and r.id =  #{id}
+		</if>
+		<if test="warehouseid != null and warehouseid != '' and warehouseid != -99 "  >
+			and r.warehouseid =  #{warehouseid}
+		</if>
+		<if test="createtime != null and createtime != '' " >
+			and r.createtime =  #{createtime}
+		</if>
+		<if test="goodskindid != null and goodskindid != '' and goodskindid != -99  " >
+			and r.goodskindid =  #{goodskindid}
+		</if>
+		<if test="nums != null and nums != ''" >
+			and r.nums =  #{nums}
+		</if>
+		<if test="peopleid != null and peopleid != ''  and peopleid != -99   " >
+			and r.peopleid =  #{peopleid}
+		</if>
+		<if test="details != null and details != ''" >
+			and r.details =  #{details}
+		</if>
+		<if test="remark != null and remark != ''" >
+			and r.remark =  #{remark}
+		</if>
+	</trim>
 </sql>
    
 
