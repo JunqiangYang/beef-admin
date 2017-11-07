@@ -16,50 +16,51 @@
 	<result column="details" property="details"/>
 	<result column="remark" property="remark"/>
 	<result column="price" property="price"/>
+	<result column="peopleid" property="peopleid"/>
+	<result column="status" property="status"/>
+	<result column="details" property="details"/>
+	<result column="remark" property="remark"/>
+	<result column="warehouseName" property="warehouseName"/>
+	<result column="name" property="name"/>
+	<result column="gooddsKindName" property="gooddsKindName"/>
 </resultMap>
        
 <!-- t_records table all fields -->
 <sql id="Base_Column_List" >
-	 id,opertype,warehouseid,createtime,goodskindid,nums,peopleid,status,details,remark,price
+	  r.id,r.opertype,r.warehouseid,r.createtime,r.goodskindid,r.nums,r.price,r.peopleid,r.status,r.details,r.remark,w.warehouseName,c.name,g.gooddsKindName
 </sql>
    
    
 <!-- 查询条件 -->
 <sql id="Example_Where_Clause">
-where 1=1 and opertype=0 and status&lt;2
+where 1=1 and r.opertype=0 and r.status &lt;2
 <trim  suffixOverrides="," >
 	<if test="id != null and id != ''" >
-	    and id =  #{id}
-	</if>
-	<if test="opertype != null and opertype != ''" >
-	    and opertype =  #{opertype}
+	    and r.id =  #{id}
 	</if>
 	<if test="warehouseid != null and warehouseid != ''" >
-	    and warehouseid =  #{warehouseid}
+	    and r.warehouseid =  #{warehouseid}
 	</if>
 	<if test="createtime != null and createtime != ''" >
-	    and createtime =  #{createtime}
+	    and r.createtime =  #{createtime}
 	</if>
 	<if test="goodskindid != null and goodskindid != ''" >
-	    and goodskindid =  #{goodskindid}
+	    and r.goodskindid =  #{goodskindid}
 	</if>
 	<if test="nums != null and nums != ''" >
-	    and nums =  #{nums}
+	    and r.nums =  #{nums}
 	</if>
 	<if test="peopleid != null and peopleid != ''" >
-	    and peopleid =  #{peopleid}
-	</if>
-	<if test="status != null and status != ''" >
-	    and status =  #{status}
+	    and r.peopleid =  #{peopleid}
 	</if>
 	<if test="details != null and details != ''" >
-	    and details =  #{details}
+	    and r.details =  #{details}
 	</if>
 	<if test="remark != null and remark != ''" >
-	    and remark =  #{remark}
+	    and r.remark =  #{remark}
 	</if>
 	<if test="price != null and price != ''" >
-	    and price =  #{price}
+	    and r.price =  #{price}
 	</if>
 </trim>
 </sql>
@@ -120,22 +121,22 @@ where 1=1 and opertype=0 and status&lt;2
  
 <!-- 根据id查询 InGoods -->
 <select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
-	select <include refid="Base_Column_List" /> 
-	 from t_records where id = #{id}
+	select <include refid="Base_Column_List" />
+	from t_records r,t_contact_person c ,t_warehouse w ,t_goods_kind g where r.id = #{id} AND r.warehouseId = w.id AND r.peopleId = c.id AND r.goodskindid = g.id
 </select>
 
 <!-- InGoods 列表总数-->
 <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
-	select count(1) from t_records 
+	select count(1) from t_records r
 	<include refid="Example_Where_Clause"/>
 </select>
   	
 <!-- 查询InGoods列表 -->
 <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
-	select 
-	<include refid="Base_Column_List"/>
-	from t_records 
+	select  r.id,r.opertype,r.warehouseid,r.createtime,r.goodskindid,r.nums,r.peopleid,r.status,w.warehouseName,c.name,g.gooddsKindName
+	from t_records r,t_contact_person c ,t_warehouse w ,t_goods_kind g
 	<include refid="Example_Where_Clause"/>
+	and r.warehouseId = w.id and r.peopleId = c.id and r.goodsKindId = g.id
 	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
       ${pager.orderCondition}
     </if>
