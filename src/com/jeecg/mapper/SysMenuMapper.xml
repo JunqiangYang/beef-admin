@@ -133,14 +133,16 @@ where 1=1   and deleted =  0
 	select 
 	<include refid="Base_Column_List"/>
 	,(SELECT COUNT(*) FROM sys_menu c  WHERE c.parentId = m.id and deleted = 0) AS subCount
-	from sys_menu m ORDER BY m.rank asc
+	from sys_menu m
 	<include refid="Example_Where_Clause"/>
+	ORDER BY m.rank asc
 	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
       ${pager.orderCondition}
     </if>
     <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
        ${pager.mysqlQueryCondition}
     </if>
+
 </select>
 
 
@@ -184,7 +186,7 @@ where 1=1   and deleted =  0
 		 AND EXISTS ( 
 			SELECT 1 FROM sys_role_rel u WHERE u.roleId = r.roleId  AND u.relType = 1 AND u.objId = #{userId}
 		 )
-	)  order by m.rank asc
+	)
 </select>
 
 
