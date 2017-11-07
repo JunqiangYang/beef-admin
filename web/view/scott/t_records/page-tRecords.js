@@ -34,8 +34,10 @@ jeecg.tRecords = function(){
         $('#divlistblock').html(html);
         $("div[name=divnuminputblock]").addClass("blockdiv");
         $("input[name='numinput']").addClass("blockdiv-input");
-        $("input[name='numinput']").each(function () {
-            $(this).on('keyup paste',function() {
+        var inputs = $("input[name^='numinput']") ;
+        var len = inputs.length ;
+        $(inputs).each(function (i,n) {
+            $(this).keyup(function(e) {
                 var str = $(this).val() ;
                 var weightformat = $("#weightformat").val() ;
                 var regex = /^\d{5}$/ ;
@@ -44,11 +46,16 @@ jeecg.tRecords = function(){
                 }
                 if(regex.test(str) || str.trim().length ==0){
                     $(this).removeClass("redborder");
+                    console.info("90");
+                    if(i<len-1){
+                        $(inputs[i+1]).focus();
+                    }
+                    // $(this).next().focus();
                 }else{
                     $(this).addClass("redborder");
                 }
             });
-        })
+        });
     };
 
     var _this = {
