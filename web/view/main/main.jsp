@@ -4,8 +4,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>平台</title>
     <%@include file="/view/resource.jsp" %>
+    <title>平台</title>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main.css">
     <script type="text/javascript" src="<%=basePath%>/js/ux/main/main.js"></script>
   </head>

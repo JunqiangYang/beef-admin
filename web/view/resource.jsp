@@ -2,6 +2,7 @@
 <%
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 %>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- 公共资源CSS,JS  -->
 <!--Css -->
 <link rel="stylesheet" type="text/css" href="<%=basePath%>/js/jquery-easyui-1.3.2/themes/bootstrap/easyui.css">
