@@ -69,6 +69,7 @@
 
 					<%--<label>状态</label>--%>
 						<%--<input name="status" type="text" maxlength="" class="easyui-numberbox"  missingMessage="请填写状态(暂时无)" style="width: 30px">--%>
+						<input name="status" type="hidden" value="0" >
 					</div>
 
 					<div id="weightinoutbox" style="margin-top: 10px; padding-top: 5px;  border-top:1px solid #ccc; ">
