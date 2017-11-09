@@ -1,17 +1,62 @@
 $package('jeecg.tRecords');
 jeecg.tRecords = function(){
-	var _box = null;
+    var _box = null;
 
-	// 缓存用户,型号,仓库 信息
-	var personlist = null ;
-	var goodskindlist = null ;
-	var warehouselist = null ;
+    // 缓存用户,型号,仓库 信息
+    var personlist = null ;
+    var goodskindlist = null ;
+    var warehouselist = null ;
+
+    var appendstr = function (str , append) {
+        if(str.trim().length == 0){
+            return append+"," ;
+        }
+        if(str.endsWith(",")){
+            return str+append+"," ;
+        }
+        if(!str.endsWith(",")){
+            return str+","+append+"," ;
+        }
+    }
+
+    var sum = function (str) {
+        var total = 0 ;
+        str+="";
+        var arr =   str.split(",");
+        //for (let obj of arr) {
+        for (var i=0; i<arr.length  ; i++){
+            var obj = arr[i] ;
+            if(obj.trim().length != 0 ){
+                total += parseInt(obj);
+            }
+        }
+        return total;
+    }
+    var refreshtotal = function(){
+        var deatils = '' ;
+        var inputs = $("input[name^='numinput']") ;
+        $(inputs).each(function (i,n) {
+            var str = $(this).val() ;
+            var weightformat = $("#weightformat").val() ;
+            var regex = /^\d{5}$/ ;
+            if(parseInt(weightformat) == 1){
+                regex =/^\d{4}$/;
+            }
+            if(regex.test(str) || str.trim().length == 0 ){
+                deatils = appendstr(deatils,str) ;
+            }
+        })
+        $("#totalweight").html(sum(deatils)) ;
+    }
 	// 创建
-	var new_4_5_div = function (str) {
-	    //var str = $('#details').val();
-	    var arr = new Array(100);
+
+    // 创建
+    var new_4_5_div = function (str) {
+        //var str = $('#details').val();
+        $("#details").val('');
+        var arr = new Array(100);
         for(var j = 0,len=arr.length; j<len; j++) { arr[j] = ''; }
-	    if(str != null && str.trim().length != 0 ){
+        if(str != null && str.trim().length != 0 ){
             var a = str.split(",");
             for(var j = 0,len=a.length; j<len; j++) { arr[j] = a[j]; }
         }
@@ -46,11 +91,10 @@ jeecg.tRecords = function(){
                 }
                 if(regex.test(str) || str.trim().length ==0){
                     $(this).removeClass("redborder");
-                    console.info("90");
                     if(i<len-1){
                         $(inputs[i+1]).focus();
                     }
-                    // $(this).next().focus();
+                    refreshtotal();
                 }else{
                     $(this).addClass("redborder");
                 }
@@ -58,8 +102,11 @@ jeecg.tRecords = function(){
         });
     };
 
+
+
     var new_1_1_div = function (str) {
         //var str = $('#details').val();
+        $("#details").val('');
         var arr = new Array(100);
         for(var j = 0,len=arr.length; j<len; j++) { arr[j] = ''; }
         if(str != null && str.trim().length != 0 ){
@@ -87,11 +134,10 @@ jeecg.tRecords = function(){
                 }
                 if(regex.test(str) || str.trim().length ==0){
                     $(this).removeClass("redborder");
-                    console.info("90");
                     if(i<len-1){
                         $(inputs[i+1]).focus();
                     }
-                    // $(this).next().focus();
+                    refreshtotal();
                 }else{
                     $(this).addClass("redborder");
                 }
@@ -149,6 +195,8 @@ jeecg.tRecords = function(){
                             // 创建4行5列 矩阵框
                             new_4_5_div(result.data.details);
                         }
+                        var total =  sum(result.data.details)
+                        $("#totalweight").html(total)  ;
                     });
 				},
                 save:function () {
@@ -170,7 +218,13 @@ jeecg.tRecords = function(){
                         }
                     });
                     if(!check) return;
-				    console.info(deatils);
+                    console.info(deatils);
+                    var total =  sum(deatils)
+                    var showtotal = parseInt($("#totalweight").html()) ;
+                    if(showtotal != total){
+                        jeecg.alert('提示',' 表单总数计算与显示异常','error');
+                        return ;
+                    }
                     if(deatils.length>0) deatils=deatils.substring(0,deatils.length-1);
                     $("#details").val(deatils);
                     $("#remark").val($("#remarktextarea").val());
@@ -178,7 +232,7 @@ jeecg.tRecords = function(){
                 }
 			},
   			dataGrid:{
-  				title:'进库记录显示',
+  				title:'进库_记录显示',
 	   			url:'dataList.do',
 	   			columns:[[
 					{field:'id',checkbox:true},
@@ -272,13 +326,16 @@ jeecg.tRecords = function(){
             $("#formgoodskindid").combobox({
                 onChange: function (n,o) {
                     console.info(n);
-                    for (let obj of goodskindlist) {
+                    // for (let obj of goodskindlist) {
+                    for (var i=0; i<goodskindlist.length  ; i++){
+                        var obj = goodskindlist[i] ;
                         if(obj.isfixedweight != undefined && parseInt(obj.id) == parseInt(n) && obj.isfixedweight ==0 ){
                             new_4_5_div('');
                             return ;
                         }
                     }
                     new_1_1_div('');
+                    $("#totalweight").html();
                 }
             });
 
