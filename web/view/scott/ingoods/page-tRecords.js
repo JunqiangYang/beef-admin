@@ -18,6 +18,7 @@ jeecg.tRecords = function(){
             return str+","+append+"," ;
         }
     }
+    ///----------------
 
     var sum = function (str) {
         var total = 0 ;
