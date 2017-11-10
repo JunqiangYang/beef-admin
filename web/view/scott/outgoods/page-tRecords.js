@@ -33,15 +33,20 @@ jeecg.tRecords = function(){
         return total;
     }
 
-    var formatWeight =function (value){
+    var formatWeight =function (value,weightformat){
         if(value=="" || value==undefined){
             return ""
         }
         value+="";
         var len = value.length ;
-        return value.toString().substring(0,len-3)+"."+value.toString().substring(len-3);
+        if(parseInt(weightformat) == 0){
+            return value.toString().substring(0,len-2)+"."+value.toString().substring(len-2);
+        }
+        if(parseInt(weightformat) == 1){
+            return value.toString().substring(0,len-3)+"."+value.toString().substring(len-3);
+        }
     }
-//---------------
+
     var refreshtotal = function(){
         var deatils = '' ;
         var inputs = $("input[name^='numinput']") ;
@@ -274,7 +279,7 @@ jeecg.tRecords = function(){
                     },
                     {field:'weightotal',title:'总重',align:'center',sortable:true,
                         formatter:function(value,row,index){
-                            return formatWeight(sum(row.details)) ;
+                            return formatWeight(sum(row.details),row.weightformat) ;
                         }
                     },
 					{field:'warehouseName',title:'仓库',align:'center',sortable:true,
@@ -341,15 +346,19 @@ jeecg.tRecords = function(){
                 onChange: function (n,o) {
                     console.info(n);
                    // for (let obj of goodskindlist) {
-                        for (var i=0; i<goodskindlist.length  ; i++){
+                    for (var i=0; i<goodskindlist.length  ; i++){
                             var obj = goodskindlist[i] ;
-                        if(obj.isfixedweight != undefined && parseInt(obj.id) == parseInt(n) && obj.isfixedweight ==0 ){
-                            new_4_5_div('');
-                            return ;
-                        }
+                            if(obj.isfixedweight != undefined && parseInt(obj.id) == parseInt(n) ){
+                                $("#weightformat").val(obj.weightformat) ;
+                                if( obj.isfixedweight ==0 ){
+                                    new_4_5_div('');
+                                }else{
+                                    new_1_1_div('');
+                                }
+                                $("#totalweight").html();
+                                return ;
+                            }
                     }
-                    new_1_1_div('');
-                    $("#totalweight").html();
                 }
             });
 		}

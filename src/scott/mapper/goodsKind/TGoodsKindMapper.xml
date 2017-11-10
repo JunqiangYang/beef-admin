@@ -9,12 +9,13 @@
 		<result column="gooddskindname" property="gooddskindname"/>
 		<result column="price" property="price"/>
 		<result column="isfixedweight" property="isfixedweight"/>
+		<result column="weightformat" property="weightformat"/>
 		<result column="remark" property="remark"/>
 	</resultMap>
 
 	<!-- t_goods_kind table all fields -->
 	<sql id="Base_Column_List" >
-		id,gooddskindname,price,isfixedweight,remark
+		id,gooddskindname,price,isfixedweight,remark,weightformat
 	</sql>
 
 
@@ -34,6 +35,9 @@
 			<if test="isfixedweight != null and isfixedweight != ''" >
 				and isfixedweight =  #{isfixedweight}
 			</if>
+			<if test="weightformat != null and weightformat != ''" >
+				and weightformat =  #{weightformat}
+			</if>
 			<if test="remark != null and remark != ''" >
 				and remark =  #{remark}
 			</if>
@@ -43,13 +47,13 @@
 
 	<!-- 插入记录 -->
 	<insert id="add" parameterType="Object" >
-		insert into t_goods_kind(id,gooddskindname,price,isfixedweight,remark)
-		values(#{id},#{gooddskindname},#{price},#{isfixedweight},#{remark})
+		insert into t_goods_kind(id,gooddskindname,price,isfixedweight,remark,weightformat)
+		values(#{id},#{gooddskindname},#{price},#{isfixedweight},#{remark},#{weightformat})
 	</insert>
 
 	<!-- 根据id，修改记录-->
 	<update id="update" parameterType="Object" >
-		update t_goods_kind set gooddskindname=#{gooddskindname},price=#{price},isfixedweight=#{isfixedweight},remark=#{remark} where id=#{id}
+		update t_goods_kind set gooddskindname=#{gooddskindname},price=#{price},isfixedweight=#{isfixedweight},remark=#{remark},weightformat=#{weightformat}  where id=#{id}
 	</update>
 
 	<!-- 修改记录，只修改只不为空的字段 -->
@@ -67,6 +71,9 @@
 			</if>
 			<if test="remark != null  ">
 				remark=#{remark},
+			</if>
+			<if test="weightformat != null  ">
+				weightformat=#{weightformat},
 			</if>
 		</trim> where id=#{id}
 	</update>

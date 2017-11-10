@@ -38,6 +38,16 @@ jeecg.tGoodsKind = function(){
                                 }
 							}
 						},
+                    {field:'weightformat',title:'重量格式',align:'center',sortable:true,
+                        formatter:function(value,row,index){
+                            if(row.weightformat == 0){
+                                return '##.##' ;
+                            }
+                            if(row.weightformat == 1){
+                                return '##.###' ;
+                            }
+                        }
+                    },
 					{field:'remark',title:'备注',align:'center',sortable:true,
 							formatter:function(value,row,index){
 								return row.remark;
