@@ -53,9 +53,9 @@ jeecg.tRecords = function(){
         $(inputs).each(function (i,n) {
             var str = $(this).val() ;
             var weightformat = $("#weightformat").val() ;
-            var regex = /^\d{5}$/ ;
+            var regex = /^\d{4}$/ ;
             if(parseInt(weightformat) == 1){
-                regex =/^\d{4}$/;
+                regex =/^\d{5}$/;
             }
             if(regex.test(str) || str.trim().length == 0 ){
                 deatils = appendstr(deatils,str) ;
@@ -99,9 +99,9 @@ jeecg.tRecords = function(){
             $(this).keyup(function(e) {
                 var str = $(this).val() ;
                 var weightformat = $("#weightformat").val() ;
-                var regex = /^\d{5}$/ ;
+                var regex = /^\d{4}$/ ;
                 if(parseInt(weightformat) == 1){
-                    regex =/^\d{4}$/;
+                    regex =/^\d{5}$/;
                 }
                 if(regex.test(str) || str.trim().length ==0){
                     $(this).removeClass("redborder");
@@ -142,9 +142,9 @@ jeecg.tRecords = function(){
             $(this).keyup(function(e) {
                 var str = $(this).val() ;
                 var weightformat = $("#weightformat").val() ;
-                var regex = /^\d{5}$/ ;
+                var regex = /^\d{4}$/ ;
                 if(parseInt(weightformat) == 1){
-                    regex =/^\d{4}$/;
+                    regex =/^\d{5}$/;
                 }
                 if(regex.test(str) || str.trim().length ==0){
                     $(this).removeClass("redborder");
@@ -221,9 +221,9 @@ jeecg.tRecords = function(){
                     $("input[name='numinput']").each(function () {
                         var str = $(this).val() ;
                         var weightformat = $("#weightformat").val() ;
-                        var regex = /^\d{5}$/ ;
+                        var regex = /^\d{4}$/ ;
                         if(parseInt(weightformat) == 1){
-                            regex =/^\d{4}$/;
+                            regex =/^\d{5}$/;
                         }
                         if(regex.test(str) || str.trim().length ==0){
                             $(this).removeClass("redborder");

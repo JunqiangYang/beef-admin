@@ -77,8 +77,8 @@
 					<div style="margin-top: 10px; padding-top: 5px;  border-top:1px solid #ccc; ">
 						<label>重量格式:</label>
 							<select id="weightformat" name="weightformat" style="width: 80px" disabled="true" >
-								<option value="0">五位数</option>
-								<option value="1">四位数</option>
+								<option value="0">四位数</option>
+								<option value="1">五位数</option>
 							</select>
 						<br/><br/>
 						<input name="details" id="details" type="hidden" >
