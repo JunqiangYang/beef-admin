@@ -80,12 +80,7 @@
 		<include refid="Base_Column_List"/>
 		from t_contact_person
 		<include refid="Example_Where_Clause"/>
-		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
-			${pager.orderCondition}
-		</if>
-		<if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
-			${pager.mysqlQueryCondition}
-		</if>
+
 	</select>
 
 </mapper>
