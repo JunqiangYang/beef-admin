@@ -46,7 +46,7 @@
 </div>
 
 <!-- Edit Win&Form -->
-<div id="edit-win" class="easyui-dialog" title="入库码单" data-options="closed:true,iconCls:'icon-save',modal:true" style=" margin-top: 5px; width:470px; height: 600px;">
+<div id="edit-win" class="easyui-dialog" title="入库码单" data-options="closed:true,iconCls:'icon-save',modal:true" style=" margin-top: 5px; width:470px; height: 400px;">
 	<form id="editForm" class="ui-form" method="post">
 		<input class="hidden" name="id" >
 		<div class="ui-edit">
