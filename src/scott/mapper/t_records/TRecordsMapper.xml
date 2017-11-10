@@ -23,7 +23,7 @@
        
 <!-- t_records table all fields -->
 <sql id="Base_Column_List" >
-	 r.id,r.opertype,r.warehouseid,r.createtime,r.goodskindid,r.nums,r.price,r.peopleid,r.status,r.details,r.remark,w.warehouseName,c.name,g.gooddsKindName
+	 r.id,r.opertype,r.warehouseid,r.createtime,r.goodskindid,r.nums,r.price,r.peopleid,r.status,r.details,r.remark,w.warehouseName,g.gooddsKindName
 </sql>
    
    
@@ -119,7 +119,7 @@ where 1=1
 <!-- 根据id查询 recordsController -->
 <select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
 	select <include refid="Base_Column_List" /> 
-	 from t_records r,t_contact_person c ,t_warehouse w ,t_goods_kind g where r.id = #{id} AND r.warehouseId = w.id AND r.peopleId = c.id AND r.goodskindid = g.id
+	 from t_records r ,t_warehouse w ,t_goods_kind g where r.id = #{id} AND r.warehouseId = w.id AND r.goodskindid = g.id
 </select>
 
 <!-- recordsController 列表总数-->
@@ -130,8 +130,8 @@ where 1=1
   	
 <!-- 查询recordsController列表 -->
 <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
-	select  r.id,r.opertype,r.warehouseid,r.createtime,r.goodskindid,r.nums,r.peopleid,r.status,w.warehouseName,c.name,g.gooddsKindName
-	from t_records r,t_contact_person c ,t_warehouse w ,t_goods_kind g
+	select  r.id,r.opertype,r.warehouseid,r.createtime,r.goodskindid,r.nums,r.peopleid,r.status,w.warehouseName,g.gooddsKindName
+	from t_records r,t_warehouse w ,t_goods_kind g
 	<include refid="Example_Where_Clause"/>
 	and r.warehouseId = w.id and r.peopleId = c.id and r.goodsKindId = g.id
 	<if test="pager.orderCondition != null and pager.orderCondition != ''" >

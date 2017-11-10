@@ -185,7 +185,9 @@ jeecg.tRecords = function(){
 					// 			return row.remark;
 					// 		}
 					// 	},
-					]]
+					]],
+                    toolbar:[
+                    ]
 			}
 		},
 		init:function(){
