@@ -1,5 +1,5 @@
-$package('jeecg.tRecords');
-jeecg.tRecords = function(){
+$package('jeecg.outRecords');
+jeecg.outRecords = function(){
 	var _box = null;
 
 	// 缓存用户,型号,仓库 信息
@@ -367,5 +367,5 @@ jeecg.tRecords = function(){
 }();
 
 $(function(){
-	jeecg.tRecords.init();
+	jeecg.outRecords.init();
 });
