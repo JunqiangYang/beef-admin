@@ -38,8 +38,18 @@
 					</div>
 					<div class="fitem">
 						<label>是否固定重量</label>
-						<input name="isfixedweight" type="text" maxlength="" class="easyui-numberbox" data-options="required:true" missingMessage="请填写是否固定重量">
+						<select id="isfixedweight" name="isfixedweight" style="width: 80px" >
+							<option value="0">不定重</option>
+							<option value="1">定重</option>
+						</select>
 					</div>
+				 <div class="fitem">
+					 <label>是否固定重量</label>
+					 <select id="weightformat" name="weightformat" style="width: 80px" >
+						 <option value="0">四位数(##.##)</option>
+						 <option value="1">五位数(##.###)</option>
+					 </select>
+				 </div>
 					<div class="fitem">
 						<label>备注</label>
 						<input name="remark" type="text" maxlength="500" class="easyui-validatebox" data-options="" missingMessage="请填写备注">
