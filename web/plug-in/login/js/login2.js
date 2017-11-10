@@ -1,51 +1,11 @@
 $(document).ready(function() {
-	getCookie();
+	//getCookie();
 	onfocus();
-	$(".on_off_checkbox").iphoneStyle();
-	$('.tip a ').tipsy({
-		gravity : 'sw'
-	});
-	$('#login').show().animate({
-		opacity : 1
-	}, 2000);
-	$('.logo').show().animate({
-		opacity : 1,
-		top : '32%'
-	}, 800, function() {
-		$('.logo').show().delay(1200).animate({
-			opacity : 1,
-			top : '1%'
-		}, 300, function() {
-			$('.formLogin').animate({
-				opacity : 1,
-				left : '0'
-			}, 300);
-			$('.userbox').animate({
-				opacity : 0
-			}, 200).hide();
-		});
-	});
+});
 
-});
-$('.userload').click(function(e) {
-	$('.formLogin').animate({
-		opacity : 1,
-		left : '0'
-	}, 300);
-	$('.userbox').animate({
-		opacity : 0
-	}, 200, function() {
-		$('.userbox').hide();
-	});
-});
-// 重置
-$('#forgetpass').click(function(e) {
-	$(":input").each(function() {
-	$('#'+this.name).val("");
-	});
-});
 // 点击登录
 $('#but_login').click(function(e) {
+	alert("123123");
 	submit();
 });
 //回车登录
@@ -93,11 +53,12 @@ function Login() {
 		error : function() {// 请求失败处理函数
 		  alert('错误');
 		},
-		success : function(data) {
-
+		success : function(data)
+		{
+			console.info("1111111111");
 			if (data.success) {
 				loginsuccess();
-				setTimeout("window.location.href='main.shtml'", 100);
+				setTimeout("window.location.href='main2.shtml'", 100);
 			} else {
 				showError(data.msg);
 			}
@@ -148,36 +109,6 @@ function showError(str) {
 	}, 500);
 
 }
-//验证通过加载动画
-function loginsuccess()
-{
-	$("#login").animate({
-		opacity : 1,
-		top : '49%'
-	}, 200, function() {
-		$('.userbox').show().animate({
-			opacity : 1
-		}, 500);
-		$("#login").animate({
-			opacity : 0,
-			top : '60%'
-		}, 500, function() {
-			$(this).fadeOut(200, function() {
-				$(".text_success").slideDown();
-				$("#successLogin").animate({
-					opacity : 1,
-					height : "200px"
-				}, 1000);
-			});
-		});
-	});
-}
-function showSuccess(str) {
-	$('#alertMessage').removeClass('error').html(str).stop(true, true).show().animate({
-		opacity : 1,
-		right : '0'
-	}, 500);
-}
 
 function onfocus() {
 	if ($(window).width() > 480) {
@@ -191,38 +122,5 @@ function onfocus() {
 	}
 }
 
-function hideTop() {
-	$('#alertMessage').animate({
-		opacity : 0,
-		right : '-20'
-	}, 500, function() {
-		$(this).hide();
-	});
-}
-//加载信息
-function loading(name, overlay) {
-	$('body').append('<div id="overlay"></div><div id="preloader">' + name + '..</div>');
-	if (overlay == 1) {
-		$('#overlay').css('opacity', 0.1).fadeIn(function() {
-			$('#preloader').fadeIn();
-		});
-		return false;
-	}
-	$('#preloader').fadeIn();
-}
 
-function unloading() {
-	$('#preloader').fadeOut('fast', function() {
-		$('#overlay').fadeOut();
-	});
-}
-// 表单晃动
-function jrumble() {
-	$('.inner').jrumble({
-		x : 4,
-		y : 0,
-		rotation : 0
-	});
-	$('.inner').trigger('startRumble');
-	setTimeout('$(".inner").trigger("stopRumble")', 500);
-}
+

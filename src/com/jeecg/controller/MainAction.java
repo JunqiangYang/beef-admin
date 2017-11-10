@@ -261,7 +261,18 @@ public class MainAction extends BaseAction {
 		context.put("menuList", treeMenu(rootMenus,childMenus));
 		return forword("main/main",context); 
 	}
-	
+
+	@Auth(verifyURL=false)
+	@RequestMapping("/main2")
+	public ModelAndView  main2(HttpServletRequest request){
+		Map<String,Object>  context = getRootMap();
+		SysUser user = SessionUtils.getUser(request);
+		context.put("user", user);
+		return forword("scott/outgoods/tRecords",context);
+	}
+
+
+
 	/**
 	 * 构建树形数据
 	 * @return
