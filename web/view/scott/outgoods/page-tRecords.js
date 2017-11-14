@@ -24,10 +24,22 @@ jeecg.outRecords = function(){
         str+="";
         var arr =   str.split(",");
         //for (let obj of arr) {
-            for (var i=0; i<arr.length  ; i++){
-                var obj = arr[i] ;
+        for (var i=0; i<arr.length  ; i++){
+            var obj = arr[i] ;
             if(obj.trim().length != 0 ){
                 total += parseInt(obj);
+            }
+        }
+        var formatgoogskindId  = parseInt($('#formgoodskindid').combobox('getValue'));
+        for (var i=0; i<goodskindlist.length  ; i++){
+            var goodkind = goodskindlist[i] ;
+            if (formatgoogskindId == goodkind.id && goodkind.isFixedweight ==1 ){
+                console.info(goodkind) ;
+                var nums  = parseInt($('#nums').val()) ;
+                for(var j = 1 ; j < num ; j++){
+                    total+=total ;
+                }
+                break ;
             }
         }
         return total;
@@ -74,7 +86,7 @@ jeecg.outRecords = function(){
             var a = str.split(",");
             for(var j = 0,len=a.length; j<len; j++) { arr[j] = a[j]; }
         }
-        console.info(arr);
+       // console.info(arr);
         var n = 0 ;
         var html = '' ;
         for (var i=0;i<4;i++)
@@ -121,13 +133,8 @@ jeecg.outRecords = function(){
     var new_1_1_div = function (str) {
         //var str = $('#details').val();
         $("#details").val('');
-        var arr = new Array(100);
-        for(var j = 0,len=arr.length; j<len; j++) { arr[j] = ''; }
-        if(str != null && str.trim().length != 0 ){
-            var a = str.split(",");
-            for(var j = 0,len=a.length; j<len; j++) { arr[j] = a[j]; }
-        }
-        console.info(arr);
+        var arr = str.split(",");
+       // console.info(arr);
         var n = 0 ;
         var html = '' ;
         html += '<div class="blockdiv">' ;
@@ -157,6 +164,10 @@ jeecg.outRecords = function(){
                 }
             });
         });
+        if(str.length>4){
+            refreshtotal();
+        }
+
     };
 
     var _this = {
@@ -180,7 +191,9 @@ jeecg.outRecords = function(){
                         textField:'warehousename'
                     });
                     // 创建4行5列 矩阵框
-                    //new_4_5_div('');
+                    new_4_5_div('');
+                    $("#details").val('');
+                    $("#nums").val('0');
                     $("#totalweight").html();
 
 				},
@@ -204,7 +217,7 @@ jeecg.outRecords = function(){
                         $("#totalweight").html();
                         $("#remarktextarea").val($("#remark").val());
                         var isfixedweight  = parseInt($('#formgoodskindid').combobox('getValue'));
-                        if(result.data.isfixedweight != undefined && parseInt(result.data.id) == parseInt(n) && result.data.isfixedweight ==0 ){
+                        if(result.data.isfixedweight != undefined && result.data.isfixedweight ==0 ){
                             new_1_1_div(result.data.details);
                         }else{
                             // 创建4行5列 矩阵框
@@ -234,8 +247,8 @@ jeecg.outRecords = function(){
                         }
                     });
                     if(!check) return;
-				    console.info(deatils);
-                    var total =  sum(deatils)
+				  //  console.info(deatils);
+                    var total =  sum(deatils) ;
                     var showtotal = parseInt($("#totalweight").html()) ;
                     if(showtotal != total){
                         jeecg.alert('提示',' 表单总数计算与显示异常','error');
@@ -344,7 +357,7 @@ jeecg.outRecords = function(){
             });
             $("#formgoodskindid").combobox({
                 onChange: function (n,o) {
-                    console.info(n);
+                  //  console.info(n);
                    // for (let obj of goodskindlist) {
                     for (var i=0; i<goodskindlist.length  ; i++){
                             var obj = goodskindlist[i] ;
@@ -353,7 +366,7 @@ jeecg.outRecords = function(){
                                 if( obj.isfixedweight ==0 ){
                                     new_4_5_div('');
                                 }else{
-                                    new_1_1_div('');
+                                    new_1_1_div(''+obj.weight+'');
                                 }
                                 $("#totalweight").html();
                                 return ;
@@ -361,7 +374,13 @@ jeecg.outRecords = function(){
                     }
                 }
             });
-		}
+
+            $("#nums").numberbox({
+                "onChange":function(){
+                    refreshtotal();
+                }
+            });
+        }
 	}
 	return _this;
 }();
