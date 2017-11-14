@@ -10,6 +10,7 @@
 		<result column="price" property="price"/>
 		<result column="isfixedweight" property="isfixedweight"/>
 		<result column="weightformat" property="weightformat"/>
+		<result column="weight" property="weight"/>
 		<result column="remark" property="remark"/>
 	</resultMap>
 
