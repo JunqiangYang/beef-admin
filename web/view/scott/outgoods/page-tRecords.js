@@ -193,7 +193,7 @@ jeecg.outRecords = function(){
                     // 创建4行5列 矩阵框
                     new_4_5_div('');
                     $("#details").val('');
-                    $("#nums").val('0');
+                    $('#nums').numberbox('setValue', 0);
                     $("#totalweight").html();
 
 				},
