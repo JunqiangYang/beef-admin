@@ -35,7 +35,8 @@ jeecg.outRecords = function(){
             var goodkind = goodskindlist[i] ;
             if (formatgoogskindId == goodkind.id && goodkind.isFixedweight ==1 ){
                 console.info(goodkind) ;
-                var nums  = parseInt($('#nums').val()) ;
+                var nums  = parseInt($('#nums').numberbox('getValue')) ;
+                console.info("nums="+nums) ;
                 for(var j = 1 ; j < num ; j++){
                     total+=total ;
                 }
@@ -194,7 +195,8 @@ jeecg.outRecords = function(){
                     new_4_5_div('');
                     $("#details").val('');
                     $('#nums').numberbox('setValue', 0);
-                    $("#totalweight").html();
+                    $("#totalweight").html('');
+                    $("#totalweight").text('');
 
 				},
 				edit:function(){
@@ -214,7 +216,8 @@ jeecg.outRecords = function(){
                         textField:'warehousename'
                     });
 					_box.handler.edit(function (result) {
-                        $("#totalweight").html();
+                        $("#totalweight").html('');
+                        $("#totalweight").text('');
                         $("#remarktextarea").val($("#remark").val());
                         var isfixedweight  = parseInt($('#formgoodskindid').combobox('getValue'));
                         if(result.data.isfixedweight != undefined && result.data.isfixedweight ==0 ){
@@ -368,7 +371,8 @@ jeecg.outRecords = function(){
                                 }else{
                                     new_1_1_div(''+obj.weight+'');
                                 }
-                                $("#totalweight").html();
+                                $("#totalweight").html('');
+                                $("#totalweight").text('');
                                 return ;
                             }
                     }
@@ -376,7 +380,8 @@ jeecg.outRecords = function(){
             });
 
             $("#nums").numberbox({
-                "onChange":function(){
+                "onChange":function(n,o){
+                    console.info("onchange");
                     refreshtotal();
                 }
             });
