@@ -15,7 +15,7 @@
 
 	<!-- t_goods_kind table all fields -->
 	<sql id="Base_Column_List" >
-		id,gooddskindname,price,isfixedweight,remark,weightformat
+		id,gooddskindname,price,isfixedweight,remark,weightformat,weight
 	</sql>
 
 
@@ -38,6 +38,9 @@
 			<if test="weightformat != null and weightformat != ''" >
 				and weightformat =  #{weightformat}
 			</if>
+			<if test="weight != null and weight != ''" >
+				and weight =  #{weight}
+			</if>
 			<if test="remark != null and remark != ''" >
 				and remark =  #{remark}
 			</if>
@@ -47,13 +50,13 @@
 
 	<!-- 插入记录 -->
 	<insert id="add" parameterType="Object" >
-		insert into t_goods_kind(id,gooddskindname,price,isfixedweight,remark,weightformat)
-		values(#{id},#{gooddskindname},#{price},#{isfixedweight},#{remark},#{weightformat})
+		insert into t_goods_kind(id,gooddskindname,price,isfixedweight,remark,weightformat,weight)
+		values(#{id},#{gooddskindname},#{price},#{isfixedweight},#{remark},#{weightformat},#{weight})
 	</insert>
 
 	<!-- 根据id，修改记录-->
 	<update id="update" parameterType="Object" >
-		update t_goods_kind set gooddskindname=#{gooddskindname},price=#{price},isfixedweight=#{isfixedweight},remark=#{remark},weightformat=#{weightformat}  where id=#{id}
+		update t_goods_kind set gooddskindname=#{gooddskindname},price=#{price},isfixedweight=#{isfixedweight},remark=#{remark},weightformat=#{weightformat},weight=#{weight}  where id=#{id}
 	</update>
 
 	<!-- 修改记录，只修改只不为空的字段 -->
@@ -74,6 +77,9 @@
 			</if>
 			<if test="weightformat != null  ">
 				weightformat=#{weightformat},
+			</if>
+			<if test="weight != null  ">
+				weight=#{weight},
 			</if>
 		</trim> where id=#{id}
 	</update>
@@ -101,12 +107,8 @@
 		<include refid="Base_Column_List"/>
 		from t_goods_kind
 		<include refid="Example_Where_Clause"/>
-		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
-			${pager.orderCondition}
-		</if>
-		<if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
-			${pager.mysqlQueryCondition}
-		</if>
+
+
 	</select>
 
 </mapper>

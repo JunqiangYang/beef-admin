@@ -48,17 +48,46 @@ jeecg.tGoodsKind = function(){
                             }
                         }
                     },
+                    {field:'weight',title:'重量',align:'center',sortable:true,
+                        formatter:function(value,row,index){
+                            return row.weight;
+                        }
+                    },
 					{field:'remark',title:'备注',align:'center',sortable:true,
 							formatter:function(value,row,index){
 								return row.remark;
 							}
-						},
+					}
+
 					]]
 			}
 		},
 		init:function(){
 			_box = new YDataGrid(_this.config); 
 			_box.init();
+
+            $('#isfixedweight').change(function(){
+                var value=$(this).children('option:selected').val();//这就是selected的值
+				if(parseInt(value) == 1){
+                    $("#weight").removeAttr("disabled");
+				}else{
+                    $("#weight").attr("disabled","disabled");
+				}
+            }) ;
+
+            $("#weight").keyup(function(){
+                var weightformat = $("#weightformat").val() ;
+                var regex = /^\d{4}$/ ;
+                if(parseInt(weightformat) == 1){
+                    regex =/^\d{5}$/;
+                }
+                if(regex.test(str) || str.trim().length ==0){
+                    $(this).removeClass("redborder");
+                }else{
+                    $(this).addClass("redborder");
+                }
+            });
+
 		}
 	}
 	return _this;
