@@ -26,8 +26,9 @@
 			<label class="ui-label">价格(元):</label><input name="price" class="easyui-box ui-text" style="width:100px;">
 	    </p>
 	    <a href="#" id="btn-search" class="easyui-linkbutton" iconCls="icon-search">查询</a>
-      </form>  
-     </div> 
+		 <label style="color: red; margin-left: 20px" >平台约定统一重量格式为正数,输入不带小数点,单位公斤.</label>
+      </form>
+     </div>
      <!--  Search panel end -->
 
      <!-- Data List -->
