@@ -71,7 +71,7 @@
 						<input name="nums" id="nums" type="text" style="width: 55px"  readonly  >
 
 					<%--<label>状态</label>--%>
-						<input name="status" type="hidden" value="0" >
+						<input name="status" type="hidden" value="2" >
 					</div>
 
 					<div style=" margin:5px auto;  padding-top: 5px;  border-top:1px solid #ccc;  width:470px; ">

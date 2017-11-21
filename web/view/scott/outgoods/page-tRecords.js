@@ -293,7 +293,7 @@ jeecg.outRecords = function(){
                         }
                         $("#nums").val(result.data.nums);
                         $("#totalweight").html(formatWeight(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId),result.data.weightformat)) ;
-                        var price = (result.data.price+"").trim().length==0 ? 0 : result.data.price;
+                        var price = result.data.price == null ? 0 : result.data.price;
                         console.info(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)+","+parseFloat(price)+","+formatPricesss(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2, result.data.weightformat)) ;
                         $("#totalprice").html( formatPricesss(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2, result.data.weightformat)) ;
                     });
