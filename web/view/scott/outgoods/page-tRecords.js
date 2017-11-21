@@ -75,7 +75,24 @@ jeecg.outRecords = function(){
             console.info("sumWeight error!!")
         }
         return total;
-    }
+    };
+    var formatPricesss =function (value,weightformat){
+        //weightformat 是否固定重量 0(不定),1(定重)
+        if(value=="" || value==undefined){
+            return ""
+        }
+        var totalprice = 0 ;
+        if(parseInt(weightformat) == 0){
+            console.info(parseFloat(value)*parseFloat(0.01)) ;
+            totalprice = parseFloat(value)*parseFloat(0.01);
+        }
+        if(parseInt(weightformat) == 1){
+            console.info(parseFloat(value)*parseFloat(0.001)) ;
+            totalprice =  parseFloat(value)*parseFloat(0.001) ;
+        }
+        totalprice = Math.round(totalprice * 100) / 100
+        return totalprice ;
+    };
 
 
     var formatWeight =function (value,weightformat){
@@ -89,18 +106,6 @@ jeecg.outRecords = function(){
         }
         if(parseInt(weightformat) == 1){
             return value.toString().substring(0,len-3)+"."+value.toString().substring(len-3);
-        }
-    }
-    var formatPrice =function (value,weightformat){
-        //weightformat 是否固定重量 0(不定),1(定重)
-        if(value=="" || value==undefined){
-            return ""
-        }
-        if(parseInt(weightformat) == 0){
-            return parseFloat(value)*parseFloat(0.01);
-        }
-        if(parseInt(weightformat) == 1){
-            return parseFloat(value)*parseFloat(0.001) ;
         }
     }
 
@@ -131,7 +136,7 @@ jeecg.outRecords = function(){
         $("#totalweight").html(sum(deatils)) ;
         var price = $('#price').val().trim().length==0 ? 0 : $('#price').val();
         console.info(parseFloat(sum(deatils))+","+parseFloat(price)) ;
-        $("#totalprice").html( formatPrice(parseFloat(sum(deatils))*parseFloat(price)*2,weightformat))  ;
+        $("#totalprice").html( formatPricesss(parseFloat(sum(deatils))*parseFloat(price)*2,weightformat))  ;
     }
 
     // 创建
@@ -272,7 +277,6 @@ jeecg.outRecords = function(){
                     });
 					_box.handler.edit(function (result) {
                         $("#remarktextarea").val($("#remark").val());
-                        var isfixedweight  = parseInt($('#formgoodskindid').combobox('getValue'));
                         if(result.data.isfixedweight != undefined && result.data.isfixedweight ==0 ){
                             new_1_1_div(result.data.details);
                         }else{
@@ -281,8 +285,8 @@ jeecg.outRecords = function(){
                         }
                         $("#totalweight").html(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)) ;
                         var price = (result.data.price+"").trim().length==0 ? 0 : result.data.price;
-                        console.info(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)+","+parseFloat(price)) ;
-                        $("#totalprice").html( formatPrice(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2, isfixedweight)) ;
+                        console.info(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)+","+parseFloat(price)+","+formatPricesss(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2, result.data.isfixedweight)) ;
+                        $("#totalprice").html( formatPricesss(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2, result.data.isfixedweight)) ;
                     });
 				},
                 save:function () {
