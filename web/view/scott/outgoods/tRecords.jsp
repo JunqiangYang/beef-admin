@@ -66,7 +66,7 @@
 						<label>型号:</label>
 						<select class="easyui-combobox" name="goodskindid" id="formgoodskindid" style="width: 80px"></select>
 						<label>价格(元):</label>
-						<input name="price" id="price"  type="text" class="easyui-textbox"  data-options="required:true" missingMessage="请填价格" style="width: 55px">
+						<input name="price" id="price"  type="text"  style="width: 55px">
 						<label>件数:</label>
 						<input name="nums" id="nums" type="text" style="width: 55px" disabled="disabled" >
 

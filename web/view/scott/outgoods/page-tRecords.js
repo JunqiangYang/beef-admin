@@ -105,14 +105,19 @@ jeecg.outRecords = function(){
             if(parseInt(weightformat) == 1){
                 regex =/^\d{5}$/;
             }
-            if(regex.test(str) || str.trim().length == 0 ){
+            if(str.trim().length==0){
+                return  ;
+            }
+            if(regex.test(str)){
                 deatils = appendstr(deatils,str) ;
                 boxnum++ ;
             }
         });
         $('#nums').val(boxnum);
         $("#totalweight").html(sum(deatils)) ;
-        $("#totalprice").html(parseFloat(sum(deatils))*parseFloat($('#price').numberbox('getValue'))) ;
+        var price = $('#price').val().trim().length==0 ? 0 : $('#price').val();
+        console.info(parseFloat(sum(deatils))+","+parseFloat(price)) ;
+        $("#totalprice").html(parseFloat(sum(deatils))*parseFloat(price)) ;
     }
 
     // 创建
@@ -418,18 +423,11 @@ jeecg.outRecords = function(){
                 }
             });
 
-            // $("#nums").numberbox({
-            //     "onChange":function(n,o){
-            //         console.info("onchange");
-            //         refreshtotal();
-            //     }
-            // });
-            $("#price").numberbox({
-                "onChange":function(n,o){
-                    console.info("onchange");
-                    refreshtotal();
-                }
+            $("#price").on('input',function(e){
+                console.info("onchange");
+                refreshtotal();
             });
+
         }
 	}
 	return _this;
