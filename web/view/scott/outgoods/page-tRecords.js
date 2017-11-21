@@ -277,7 +277,7 @@ jeecg.outRecords = function(){
                     });
 					_box.handler.edit(function (result) {
                         $("#remarktextarea").val($("#remark").val());
-                        if(result.data.isfixedweight != undefined && result.data.isfixedweight ==0 ){
+                        if(result.data.isfixedweight != undefined && result.data.isfixedweight ==1 ){
                             new_1_1_div(result.data.details);
                         }else{
                             // 创建4行5列 矩阵框
@@ -300,7 +300,10 @@ jeecg.outRecords = function(){
                         if(parseInt(weightformat) == 1){
                             regex =/^\d{5}$/;
                         }
-                        if(regex.test(str) || str.trim().length ==0){
+                        if(str.trim().length == 0){
+                            return;
+                        }
+                        if(regex.test(str)){
                             $(this).removeClass("redborder");
                             if(str.trim().length>0) {deatils += (str+",") ; }
                         }else{
