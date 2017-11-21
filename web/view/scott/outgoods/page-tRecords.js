@@ -308,7 +308,21 @@ jeecg.outRecords = function(){
 								return "<a href=''></a>";
 							}
 						}
-					]]
+					]],
+                toolbar:[
+                    {id:'btnadd',text:'添加',btnType:'add'},
+                    {id:'btnedit',text:'查看',btnType:'edit'},
+                    {id:'btndelete',text:'删除',btnType:'remove'},
+                    {
+                        id:'btnprint',
+                        text:'打印',
+                        iconCls:'icon-print',
+                        handler:function(){
+                            console.info("print");
+                            console.info("获取需要打印数据, 打印赋值, 打印div");
+                        }
+                    }
+                ]
 			}
 		},
 		init:function(){

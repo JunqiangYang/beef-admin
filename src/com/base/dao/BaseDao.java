@@ -21,7 +21,7 @@ public interface BaseDao<T> {
 	public int queryByCount(BasePage page);
 	
 	public List<T> queryByList(BasePage page);
-	
-	
+
 	public T queryById(Object id);
+
 }

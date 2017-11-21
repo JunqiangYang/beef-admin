@@ -85,6 +85,7 @@ public class InGoodsController extends BaseAction{
 	public void save(InGoods entity, Integer[] typeIds, HttpServletResponse response) throws Exception{
 		Map<String,Object>  context = new HashMap<String,Object>();
 		entity.setOpertype(0);
+		entity.setStatus(2);
 		if(entity.getId()==null||StringUtils.isBlank(entity.getId().toString())){
 			tRecordsService.add(entity);
 		}else{

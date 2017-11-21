@@ -64,11 +64,11 @@
 					 </select>
 				 </div>
 				 <div class="fitem">
-					 <label>定重每箱重量(公斤)</label>
-					 <input name="weight" id="weight" type="text" disabled="disabled"  />
+					 <label>定重每箱重量</label>
+					 <input name="weight" id="weight" type="text" disabled="disabled"  />(公斤/KG)
 				 </div>
 				 <div>
-					 <label style="color: red;" >平台约定总量格式正数,输入不带小数点,单位公斤.</label>
+					 <label style="color: red; margin-left: 20px" >平台约定统一重量格式为正数,输入不带小数点,单位公斤.</label>
 					 <br/><br/><br/>
 				 </div>
 				<div class="fitem">

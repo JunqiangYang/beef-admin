@@ -47,7 +47,7 @@
      <div region="center" border="false" >
      <table id="data-list"></table>
 	 </div>
-	 
+
      <!-- Edit Win&Form -->
      <div id="edit-win" class="easyui-dialog" title="出库码单" data-options="closed:true,iconCls:'icon-save',modal:true,maximizable:true" style=" margin-top: 5px; width:470px; height: 600px;">
      	<form id="editForm" class="ui-form" method="post">  
@@ -65,7 +65,7 @@
 						</select>
 						<label>型号:</label>
 						<select class="easyui-combobox" name="goodskindid" id="formgoodskindid" style="width: 80px"></select>
-						<label>价格:</label>
+						<label>价格(元):</label>
 						<input name="price" id="price"  type="text" class="easyui-textbox"  data-options="required:true" missingMessage="请填价格" style="width: 55px">
 						<label>件数:</label>
 						<input name="nums" id="nums" type="text" maxlength="" class="easyui-numberbox"  data-options="required:true" missingMessage="请填写件数" style="width: 55px">
@@ -89,14 +89,16 @@
 							<%--<textarea id="remarktextarea" style="width: 100%;height: 50px " ></textarea>--%>
 								&nbsp;&nbsp;
 							<label>总重:</label>
-							<label id="totalweight" >******</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<label id="totalweight" >******</label> (公斤/KG)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<label>总价:</label>
-							<label id="totalprice">******</label>
+							<label id="totalprice">******</label>(元)
 						</div>
 					</div>
   			</div>
      	</form>
   	 </div>
+	 <div id="print" >
+	 </div>
   	 <script type="text/javascript" src="<%=basePath%>/view/scott/outgoods/page-tRecords.js"></script>
   </body>
 </html>

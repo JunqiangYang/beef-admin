@@ -1,7 +1,11 @@
 package scott.dao.t_records;
 
 
+import java.util.List;
+
 import com.base.dao.BaseDao;
+import com.base.page.BasePage;
+
 /**
  * 
  * <br>
@@ -11,6 +15,6 @@ import com.base.dao.BaseDao;
  * <b>版权所有：<b>版权所有(C) 2013，www.jeecg.org<br>
  */
 public interface TRecordsDao<T> extends BaseDao<T> {
-	
-	
+    public T queryByListStatByGoodType(Object goodskindid);
+    public List<T> queryByListStat(BasePage page);
 }

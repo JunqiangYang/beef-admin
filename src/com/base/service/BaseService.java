@@ -46,6 +46,7 @@ public abstract class BaseService<T>{
 		return getDao().queryByList(page);
 	}
 
+
 	public T queryById(Object id) throws Exception{
 		return getDao().queryById(id);
 	}

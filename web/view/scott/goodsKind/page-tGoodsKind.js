@@ -28,7 +28,7 @@ jeecg.tGoodsKind = function(){
 								return row.price;
 							}
 						},
-					{field:'isfixedweight',title:'是否固定重量 0(不定),1(定重)',align:'center',sortable:true,
+					{field:'isfixedweight',title:'是否固定重量',align:'center',sortable:true,
 							formatter:function(value,row,index){
                                 if(row.isfixedweight == 0){
                                     return '不定重' ;
