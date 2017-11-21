@@ -90,7 +90,7 @@
 								&nbsp;&nbsp;
 							<label>总重:</label>
 							<label id="totalweight" >******</label> (公斤/KG)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>总价(总重*2*单价):</label>
+							<label>总价</label><label style="color: red" >(总价=总重*2*单价)</label><label>:</label>
 							<label id="totalprice">******</label>(元)
 						</div>
 					</div>

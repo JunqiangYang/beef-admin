@@ -43,6 +43,7 @@ jeecg.outRecords = function(){
         return total;
     }
 
+    // TODO 这里没准得加总价
     // 列显示哪里加总数
     var sumWeight = function (str,nums,formatgoogskindId) {
         var total = 0 ;
