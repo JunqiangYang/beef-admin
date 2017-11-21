@@ -21,11 +21,6 @@
  	 <!-- Search panel start -->
  	 <div class="ui-search-panel" region="north" style="height: 80px;" title="过滤条件" data-options="striped: true,collapsible:false,iconCls:'icon-search',border:false" >  
  	 <form id="searchForm">
-        <p class="ui-fields">
-			<label class="ui-label">型号名称:</label><input name="gooddskindname" class="easyui-box ui-text" style="width:100px;">
-			<label class="ui-label">价格(元):</label><input name="price" class="easyui-box ui-text" style="width:100px;">
-	    </p>
-	    <a href="#" id="btn-search" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		 <label style="color: red; margin-left: 20px" >平台约定统一重量格式为正数,输入不带小数点,单位公斤.</label>
       </form>
      </div>

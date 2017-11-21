@@ -63,8 +63,19 @@ public class MainAction extends BaseAction {
 		Map<String,Object>  context = getRootMap();
 		return forword("login", context);
 	}
-	
-	
+
+	/**
+	 * 登录页面
+	 * @param url
+	 * @param classifyId
+	 * @return
+	 */
+	@Auth(verifyLogin=false,verifyURL=false)
+	@RequestMapping("/login2")
+	public ModelAndView  login2(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		Map<String,Object>  context = getRootMap();
+		return forword("enter/login", context);
+	}
 	
 	/**
 	 * 检查用户名称

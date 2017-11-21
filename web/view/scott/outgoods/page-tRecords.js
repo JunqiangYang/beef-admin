@@ -214,6 +214,11 @@ jeecg.outRecords = function(){
 
     var _this = {
 		config:{
+            action:{
+                save:'/outgoods/save.do',
+                getId:'/outgoods/getId.do',
+                remove:'/outgoods/delete.do'
+            },
 			event:{
 				add:function(){
                     _box.handler.add();
@@ -261,7 +266,10 @@ jeecg.outRecords = function(){
                             // 创建4行5列 矩阵框
                             new_4_5_div(result.data.details);
                         }
-                        refreshtotal();
+                        $("#totalweight").html(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)) ;
+                        var price = (result.data.price+"").trim().length==0 ? 0 : result.data.price;
+                        console.info(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)+","+parseFloat(price)) ;
+                        $("#totalprice").html(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2) ;
                     });
 				},
                 save:function () {
@@ -297,7 +305,7 @@ jeecg.outRecords = function(){
 			},
   			dataGrid:{
   				title:'待打印_出库_记录管理',
-	   			url:'dataList.do',
+	   			url:'/outgoods/dataList.do',
 	   			columns:[[
 					{field:'id',checkbox:true},
                     {field:'createtime',title:'创建时间',align:'center',sortable:true,
@@ -325,7 +333,7 @@ jeecg.outRecords = function(){
                             return row.price;
                         }
                     },
-                    {field:'weightotal',title:'总重',align:'center',sortable:true,
+                    {field:'weightotal',title:'总重',align:'center',sortable:true,width:150,
                         formatter:function(value,row,index){
                             return formatWeight(sumWeight(row.details,row.nums,row.goodsKindId),row.weightformat) ;
                         }

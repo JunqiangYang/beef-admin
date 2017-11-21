@@ -10,7 +10,6 @@
  	 <form id="searchForm">
         <p class="ui-fields">
 			<label class="ui-label">仓库名称:</label><input name="warehousename" class="easyui-box ui-text" style="width:100px;">
-			<label class="ui-label">备注:</label><input name="remark" class="easyui-box ui-text" style="width:100px;">
 	    </p>
 	    <a href="#" id="btn-search" class="easyui-linkbutton" iconCls="icon-search">查询</a>
       </form>  
