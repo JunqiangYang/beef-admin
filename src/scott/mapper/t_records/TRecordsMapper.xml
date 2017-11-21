@@ -152,21 +152,12 @@ where 1=1
 	where list.warehouseid = w.id and list.goodskindid = g.id
 </select>
 
-<!--and r.status=2-->
-<sql id="Stat_Where_Clause">
-	where r.status = 2
-	<trim  suffixOverrides="," >
-		<if test="goodskindid != null and goodskindid != -99 ">
-			and r.goodskindid=#{goodskindid}
-		</if>
-	</trim>
-</sql>
 
 	<!-- 统计查询 需注意性能 要优化 量大 -->
 <select id="queryByListStatByGoodType" resultMap="BaseResultMap"  parameterType="Object">
 	select list.*, w.warehouseName, g.gooddsKindName
 	from (select  r.opertype,r.warehouseid,r.goodskindid,sum(r.nums) as nums from t_records r
-	<include refid="Stat_Where_Clause"/>
+	where r.status = 2 and r.goodskindid=#{goodskindid}
 	group by  opertype , goodskindid ,warehouseid) as list ,t_warehouse w ,t_goods_kind g
 	where list.warehouseid = w.id and list.goodskindid = g.id
 </select>

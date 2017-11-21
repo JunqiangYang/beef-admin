@@ -1,5 +1,6 @@
 package scott.controller.warehousestat;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.base.util.HtmlUtil;
+import com.base.util.json.JSONUtil;
 import com.base.web.BaseAction;
 
 import scott.controller.t_records.TRecordsController;
@@ -63,7 +66,7 @@ public class WarehousestatController  extends BaseAction {
     }
 
 
-    public static List<TRecords> converts(List<TRecords> dataList){
+    public static ArrayList<TRecords> converts(List<TRecords> dataList){
         //设置页面数据
         //这里循环查询出来的数据统计按类型计算剩余件数.
         // 仓库,型号,剩余件数
@@ -84,7 +87,14 @@ public class WarehousestatController  extends BaseAction {
                 pair.put(tRecords.getGoodskindid(),tRecords) ;
             }
         }
-        return (List<TRecords>) pair.values();
+        ArrayList<TRecords> list = new  ArrayList<TRecords>() ;
+        list.addAll(pair.values()) ;
+        try {
+            log.info(JSONUtil.toJSONString(list));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
 }

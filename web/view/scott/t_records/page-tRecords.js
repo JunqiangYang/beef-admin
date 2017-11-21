@@ -10,7 +10,7 @@ jeecg.tRecords = function(){
 					{field:'opertype',title:'进出库',align:'center',sortable:true,
 							formatter:function(value,row,index){
   								if(row.opertype == 0){
-  									return '入库' ;
+  									return '入' ;
 								}
                                 if(row.opertype == 1){
                                     return '出库' ;
