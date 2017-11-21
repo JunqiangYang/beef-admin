@@ -44,6 +44,13 @@ where 1=1
 	<if test="createtime != null and createtime != '' " >
 	    and r.createtime =  #{createtime}
 	</if>
+	<if test="begintime != null and begintime != '' " >
+		and r.createtime &gt;=  #{begintime}
+	</if>
+	<if test="endtime != null and endtime != '' " >
+		and r.createtime &lt;=  #{endtime}
+	</if>
+
 	<if test="goodskindid != null and goodskindid != '' and goodskindid != -99  " >
 	    and r.goodskindid =  #{goodskindid}
 	</if>
