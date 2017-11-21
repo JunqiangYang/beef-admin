@@ -30,7 +30,7 @@ public class TRecordsService<T> extends BaseService<T> {
 		return getDao().queryByListStat(page);
 	}
 
-	public T queryByListStatByGoodType(Object goodskindid) throws Exception{
+	public  List<T> queryByListStatByGoodType(Object goodskindid) throws Exception{
 		return getDao().queryByListStatByGoodType(goodskindid);
 	}
 

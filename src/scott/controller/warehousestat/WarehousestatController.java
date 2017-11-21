@@ -44,15 +44,9 @@ public class WarehousestatController  extends BaseAction {
 
     @RequestMapping("/dataList")
     public void  datalist(TRecordsPage page,HttpServletResponse response) throws Exception{
-        List<TRecords> dataList = tRecordsService.queryByListStat(page);
-
-        //设置页面数据
-        //这里循环查询出来的数据统计按类型计算剩余件数.
-        // 仓库,型号,剩余件数
-        //
-
+        List<TRecords> dataList = converts(tRecordsService.queryByListStat(page));
         Map<String,Object> jsonMap = new HashMap<String,Object>();
-        jsonMap.put("total",page.getPager().getRowCount());
+        jsonMap.put("total",dataList.size());
         jsonMap.put("rows", dataList);
         HtmlUtil.writerJson(response, jsonMap);
     }
@@ -61,14 +55,36 @@ public class WarehousestatController  extends BaseAction {
     @RequestMapping("/getId")
     public void getId(String goodskindid,HttpServletResponse response) throws Exception{
         Map<String,Object>  context = new HashMap();
-        TRecords entity  = tRecordsService.queryByListStatByGoodType(goodskindid);
-        if(entity  == null){
-            sendFailureMessage(response, "没有找到对应的记录!");
-            return;
+        List<TRecords> dataList = converts(tRecordsService.queryByListStatByGoodType(goodskindid));
+        Map<String,Object> jsonMap = new HashMap<String,Object>();
+        jsonMap.put("total",dataList.size());
+        jsonMap.put("rows", dataList);
+        HtmlUtil.writerJson(response, jsonMap);
+    }
+
+
+    public static List<TRecords> converts(List<TRecords> dataList){
+        //设置页面数据
+        //这里循环查询出来的数据统计按类型计算剩余件数.
+        // 仓库,型号,剩余件数
+        Map<Integer,TRecords> pair = new HashMap<Integer,TRecords>();
+        for (TRecords tRecords : dataList) {
+            if(pair.containsKey(tRecords.getGoodskindid())){
+                TRecords saverecord = pair.get(tRecords.getGoodskindid()) ;
+                if(tRecords.getOpertype()==1){ // 出库 -
+                    saverecord.setNums(saverecord.getNums()-tRecords.getNums());
+                }else{// 入库 +
+                    saverecord.setNums(saverecord.getNums()+tRecords.getNums());
+                }
+                pair.put(tRecords.getGoodskindid(),saverecord);
+            }else{
+                if(tRecords.getOpertype() == 1){
+                    tRecords.setNums(-tRecords.getNums());
+                }
+                pair.put(tRecords.getGoodskindid(),tRecords) ;
+            }
         }
-        context.put(SUCCESS, true);
-        context.put("data", entity);
-        HtmlUtil.writerJson(response, context);
+        return (List<TRecords>) pair.values();
     }
 
 }
