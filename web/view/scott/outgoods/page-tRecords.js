@@ -91,19 +91,32 @@ jeecg.outRecords = function(){
             return value.toString().substring(0,len-3)+"."+value.toString().substring(len-3);
         }
     }
+    var formatPrice =function (value,weightformat){
+        //weightformat 是否固定重量 0(不定),1(定重)
+        if(value=="" || value==undefined){
+            return ""
+        }
+        if(parseInt(weightformat) == 0){
+            return parseFloat(value)*parseFloat(0.01);
+        }
+        if(parseInt(weightformat) == 1){
+            return parseFloat(value)*parseFloat(0.001) ;
+        }
+    }
 
     var refreshtotal = function(){
         $('#nums').val(0);
         $("#totalweight").html('') ;
         $("#totalprice").html('') ;
+        var weightformat = '';
         var deatils = '' ;
         var boxnum = 0 ;
         var inputs = $("input[name^='numinput']") ;
         $(inputs).each(function (i,n) {
             var str = $(this).val() ;
-            var weightformat = $("#weightformat").val() ;
+            weightformat = parseInt($("#weightformat").val()) ;
             var regex = /^\d{4}$/ ;
-            if(parseInt(weightformat) == 1){
+            if(weightformat == 1){
                 regex =/^\d{5}$/;
             }
             if(str.trim().length==0){
@@ -118,7 +131,7 @@ jeecg.outRecords = function(){
         $("#totalweight").html(sum(deatils)) ;
         var price = $('#price').val().trim().length==0 ? 0 : $('#price').val();
         console.info(parseFloat(sum(deatils))+","+parseFloat(price)) ;
-        $("#totalprice").html(parseFloat(sum(deatils))*parseFloat(price)*2) ;
+        $("#totalprice").html( formatPrice(parseFloat(sum(deatils))*parseFloat(price)*2,weightformat))  ;
     }
 
     // 创建
@@ -269,7 +282,7 @@ jeecg.outRecords = function(){
                         $("#totalweight").html(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)) ;
                         var price = (result.data.price+"").trim().length==0 ? 0 : result.data.price;
                         console.info(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)+","+parseFloat(price)) ;
-                        $("#totalprice").html(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2) ;
+                        $("#totalprice").html( formatPrice(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2, isfixedweight)) ;
                     });
 				},
                 save:function () {
