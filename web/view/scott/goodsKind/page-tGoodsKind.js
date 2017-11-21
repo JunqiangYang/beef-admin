@@ -68,10 +68,16 @@ jeecg.tGoodsKind = function(){
 
             $('#isfixedweight').change(function(){
                 var value=$(this).children('option:selected').val();//这就是selected的值
-				if(parseInt(value) == 1){
-                    $("#weight").removeAttr("disabled");
-				}else{
+				if(parseInt(value) == 0){
+					//不定重
                     $("#weight").attr("disabled","disabled");
+                    $("#weight").val("");
+                    $("#weightformat").removeAttr("disabled");
+				}else{
+                    //定重
+                    $("#weightformat").attr("disabled","true");
+                    $("#weightformat").find("option[value='0']").attr("selected",true);
+                    $("#weight").removeAttr("disabled");
 				}
             }) ;
 

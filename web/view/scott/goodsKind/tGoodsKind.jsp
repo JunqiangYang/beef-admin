@@ -47,24 +47,24 @@
 					</div>
 					<div class="fitem">
 						<label>是否固定重量</label>
-						<select id="isfixedweight" name="isfixedweight" style="width: 80px" >
+						<select id="isfixedweight" name="isfixedweight" style="width: 130px" >
 							<option value="0">不定重</option>
-							<option value="1">定重</option>
+							<option value="1" selected="selected" >定重</option>
 						</select>
 					</div>
 				 <div class="fitem">
 					 <label>重量格式</label>
-					 <select id="weightformat" name="weightformat" style="width: 80px" >
+					 <select id="weightformat" name="weightformat" style="width: 130px" disabled="disabled" >
 						 <option value="0">四位数(##.##)</option>
 						 <option value="1">五位数(##.###)</option>
 					 </select>
 				 </div>
 				 <div class="fitem">
 					 <label>定重每箱重量</label>
-					 <input name="weight" id="weight" type="text" disabled="disabled"  />(公斤/KG)
+					 <input name="weight" id="weight" type="text" />(公斤/KG)
 				 </div>
 				 <div>
-					 <label style="color: red; margin-left: 20px" >平台约定统一重量格式为正数,输入不带小数点,单位公斤.</label>
+					 <label style="color: red; margin-left: 20px" >平台约定统一重量格式为正数,输入不带小数点,定重型为(##.##),不定重型为(##.## 或 ##,###),单位公斤(KG).</label>
 					 <br/><br/><br/>
 				 </div>
 				<div class="fitem">
