@@ -68,7 +68,7 @@
 						<label>价格(元/斤):</label>
 						<input name="price" id="price"  type="text"  style="width: 55px">
 						<label>件数:</label>
-						<input name="nums" id="nums" type="text" style="width: 55px" disabled="disabled" >
+						<input name="nums" id="nums" type="text" style="width: 55px"  readonly  >
 
 					<%--<label>状态</label>--%>
 						<input name="status" type="hidden" value="0" >

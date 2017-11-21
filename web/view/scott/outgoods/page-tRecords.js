@@ -58,7 +58,7 @@ jeecg.outRecords = function(){
         if (goodkind !== null || goodkind !== undefined || goodkind !== '') {
             var arr =   str.split(",");
             if(goodkind.isFixedweight ==1 ){
-                console.info("nums="+nums) ;
+               // console.info("nums="+nums) ;
                 for(var j = 1 ; j < num ; j++){
                     total+=arr[0] ;
                 }
@@ -83,11 +83,11 @@ jeecg.outRecords = function(){
         }
         var totalprice = 0 ;
         if(parseInt(weightformat) == 0){
-            console.info(parseFloat(value)*parseFloat(0.01)) ;
+            //console.info(parseFloat(value)*parseFloat(0.01)) ;
             totalprice = parseFloat(value)*parseFloat(0.01);
         }
         if(parseInt(weightformat) == 1){
-            console.info(parseFloat(value)*parseFloat(0.001)) ;
+            //console.info(parseFloat(value)*parseFloat(0.001)) ;
             totalprice =  parseFloat(value)*parseFloat(0.001) ;
         }
         totalprice = Math.round(totalprice * 100) / 100
@@ -283,6 +283,7 @@ jeecg.outRecords = function(){
                             // 创建4行5列 矩阵框
                             new_4_5_div(result.data.details);
                         }
+                        $("#nums").val(result.data.nums);
                         $("#totalweight").html(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)) ;
                         var price = (result.data.price+"").trim().length==0 ? 0 : result.data.price;
                         console.info(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)+","+parseFloat(price)+","+formatPricesss(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2, result.data.isfixedweight)) ;
