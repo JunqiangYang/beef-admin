@@ -49,7 +49,7 @@
 	 </div>
 
      <!-- Edit Win&Form -->
-     <div id="edit-win" class="easyui-dialog" title="出库码单" data-options="closed:true,iconCls:'icon-save',modal:true,maximizable:true" style=" margin-top: 5px; width:470px; height: 600px;">
+     <div id="edit-win" class="easyui-dialog" title="出库码单" data-options="closed:true,iconCls:'icon-save',modal:true,maximizable:true" style=" margin-top: 5px; width:490px; height: 600px;">
      	<form id="editForm" class="ui-form" method="post">  
      		 <input class="hidden" name="id" >
      		 <div class="ui-edit">
@@ -68,13 +68,13 @@
 						<label>价格(元):</label>
 						<input name="price" id="price"  type="text" class="easyui-textbox"  data-options="required:true" missingMessage="请填价格" style="width: 55px">
 						<label>件数:</label>
-						<input name="nums" id="nums" type="text" maxlength="" class="easyui-numberbox"  data-options="required:true" missingMessage="请填写件数" style="width: 55px">
+						<input name="nums" id="nums" type="text" style="width: 55px" disabled="disabled" >
 
 					<%--<label>状态</label>--%>
 						<input name="status" type="hidden" value="0" >
 					</div>
 
-					<div style="margin-top: 10px; padding-top: 5px;  border-top:1px solid #ccc; ">
+					<div style=" margin:5px auto;  padding-top: 5px;  border-top:1px solid #ccc;  width:470px; ">
 						<label>重量格式:</label>
 							<select id="weightformat" name="weightformat" style="width: 80px" disabled="true" >
 								<option value="0">四位数</option>

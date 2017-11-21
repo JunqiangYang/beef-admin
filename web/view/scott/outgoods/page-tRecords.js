@@ -19,11 +19,10 @@ jeecg.outRecords = function(){
         }
     }
 
+    // 页面 加总数
     var sum = function (str) {
-        var total = 0 ;
-        str+="";
+        var total = 0 ;str+="";
         var arr =   str.split(",");
-        //for (let obj of arr) {
         for (var i=0; i<arr.length  ; i++){
             var obj = arr[i] ;
             if(obj.trim().length != 0 ){
@@ -34,9 +33,7 @@ jeecg.outRecords = function(){
         for (var i=0; i<goodskindlist.length  ; i++){
             var goodkind = goodskindlist[i] ;
             if (formatgoogskindId == goodkind.id && goodkind.isFixedweight ==1 ){
-                console.info(goodkind) ;
-                var nums  = parseInt($('#nums').numberbox('getValue')) ;
-                console.info("nums="+nums) ;
+                var nums  = parseInt($('#nums').val()) ;
                 for(var j = 1 ; j < num ; j++){
                     total+=total ;
                 }
@@ -45,6 +42,40 @@ jeecg.outRecords = function(){
         }
         return total;
     }
+
+    // 列显示哪里加总数
+    var sumWeight = function (str,nums,formatgoogskindId) {
+        var total = 0 ;
+        str+="";
+        var goodkind = null ;
+        for (var i=0; i<goodskindlist.length  ; i++){
+            goodkind = goodskindlist[i] ;
+            if (formatgoogskindId == goodkind.id ){
+                break ;
+            }
+        }
+        if (goodkind !== null || goodkind !== undefined || goodkind !== '') {
+            var arr =   str.split(",");
+            if(goodkind.isFixedweight ==1 ){
+                console.info("nums="+nums) ;
+                for(var j = 1 ; j < num ; j++){
+                    total+=arr[0] ;
+                }
+            }else{
+                //for (let obj of arr) {
+                for (var i=0; i<arr.length  ; i++){
+                    var obj = arr[i] ;
+                    if(obj.trim().length != 0 ){
+                        total += parseInt(obj);
+                    }
+                }
+            }
+        }else{
+            console.info("sumWeight error!!")
+        }
+        return total;
+    }
+
 
     var formatWeight =function (value,weightformat){
         if(value=="" || value==undefined){
@@ -61,7 +92,11 @@ jeecg.outRecords = function(){
     }
 
     var refreshtotal = function(){
+        $('#nums').val(0);
+        $("#totalweight").html('') ;
+        $("#totalprice").html('') ;
         var deatils = '' ;
+        var boxnum = 0 ;
         var inputs = $("input[name^='numinput']") ;
         $(inputs).each(function (i,n) {
             var str = $(this).val() ;
@@ -72,9 +107,12 @@ jeecg.outRecords = function(){
             }
             if(regex.test(str) || str.trim().length == 0 ){
                 deatils = appendstr(deatils,str) ;
+                boxnum++ ;
             }
-        })
+        });
+        $('#nums').val(boxnum);
         $("#totalweight").html(sum(deatils)) ;
+        $("#totalprice").html(parseFloat(sum(deatils))*parseFloat($('#price').numberbox('getValue'))) ;
     }
 
     // 创建
@@ -132,14 +170,11 @@ jeecg.outRecords = function(){
 
 
     var new_1_1_div = function (str) {
-        //var str = $('#details').val();
         $("#details").val('');
         var arr = str.split(",");
-       // console.info(arr);
-        var n = 0 ;
         var html = '' ;
         html += '<div class="blockdiv">' ;
-        html += '<input name="numinput" type="text" value="'+(arr[n++])+'" >';
+        html += '<input name="numinput" type="text" value="'+(arr[0])+'" >';
         html += '</div>';
         $('#divlistblock').html(html);
         $("div[name=divnuminputblock]").addClass("blockdiv");
@@ -193,11 +228,7 @@ jeecg.outRecords = function(){
                     });
                     // 创建4行5列 矩阵框
                     new_4_5_div('');
-                    $("#details").val('');
-                    $('#nums').numberbox('setValue', 0);
-                    $("#totalweight").html('');
-                    $("#totalweight").text('');
-
+                    refreshtotal();
 				},
 				edit:function(){
                     $('#formpeopleid').combobox({
@@ -216,8 +247,6 @@ jeecg.outRecords = function(){
                         textField:'warehousename'
                     });
 					_box.handler.edit(function (result) {
-                        $("#totalweight").html('');
-                        $("#totalweight").text('');
                         $("#remarktextarea").val($("#remark").val());
                         var isfixedweight  = parseInt($('#formgoodskindid').combobox('getValue'));
                         if(result.data.isfixedweight != undefined && result.data.isfixedweight ==0 ){
@@ -226,14 +255,12 @@ jeecg.outRecords = function(){
                             // 创建4行5列 矩阵框
                             new_4_5_div(result.data.details);
                         }
-                        var total =  sum(result.data.details)
-                        $("#totalweight").html(total)  ;
+                        refreshtotal();
                     });
 				},
                 save:function () {
                     var check = true ;
 				    var deatils = '' ;
-
                     $("input[name='numinput']").each(function () {
                         var str = $(this).val() ;
                         var weightformat = $("#weightformat").val() ;
@@ -250,7 +277,6 @@ jeecg.outRecords = function(){
                         }
                     });
                     if(!check) return;
-				  //  console.info(deatils);
                     var total =  sum(deatils) ;
                     var showtotal = parseInt($("#totalweight").html()) ;
                     if(showtotal != total){
@@ -295,7 +321,7 @@ jeecg.outRecords = function(){
                     },
                     {field:'weightotal',title:'总重',align:'center',sortable:true,
                         formatter:function(value,row,index){
-                            return formatWeight(sum(row.details),row.weightformat) ;
+                            return formatWeight(sumWeight(row.details,row.nums,row.goodsKindId),row.weightformat) ;
                         }
                     },
 					{field:'warehouseName',title:'仓库',align:'center',sortable:true,
@@ -376,7 +402,7 @@ jeecg.outRecords = function(){
                 onChange: function (n,o) {
                   //  console.info(n);
                    // for (let obj of goodskindlist) {
-                    for (var i=0; i<goodskindlist.length  ; i++){
+                    for(var i=0; i<goodskindlist.length  ; i++){
                             var obj = goodskindlist[i] ;
                             if(obj.isfixedweight != undefined && parseInt(obj.id) == parseInt(n) ){
                                 $("#weightformat").val(obj.weightformat) ;
@@ -385,15 +411,20 @@ jeecg.outRecords = function(){
                                 }else{
                                     new_1_1_div(''+obj.weight+'');
                                 }
-                                $("#totalweight").html('');
-                                $("#totalweight").text('');
+                                refreshtotal();
                                 return ;
                             }
                     }
                 }
             });
 
-            $("#nums").numberbox({
+            // $("#nums").numberbox({
+            //     "onChange":function(n,o){
+            //         console.info("onchange");
+            //         refreshtotal();
+            //     }
+            // });
+            $("#price").numberbox({
                 "onChange":function(n,o){
                     console.info("onchange");
                     refreshtotal();
