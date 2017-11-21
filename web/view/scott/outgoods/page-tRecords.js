@@ -117,7 +117,7 @@ jeecg.outRecords = function(){
         $("#totalweight").html(sum(deatils)) ;
         var price = $('#price').val().trim().length==0 ? 0 : $('#price').val();
         console.info(parseFloat(sum(deatils))+","+parseFloat(price)) ;
-        $("#totalprice").html(parseFloat(sum(deatils))*parseFloat(price)) ;
+        $("#totalprice").html(parseFloat(sum(deatils))*parseFloat(price)*2) ;
     }
 
     // 创建

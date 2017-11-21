@@ -49,7 +49,7 @@
 	 </div>
 
      <!-- Edit Win&Form -->
-     <div id="edit-win" class="easyui-dialog" title="出库码单" data-options="closed:true,iconCls:'icon-save',modal:true,maximizable:true" style=" margin-top: 5px; width:490px; height: 600px;">
+     <div id="edit-win" class="easyui-dialog" title="出库码单" data-options="closed:true,iconCls:'icon-save',modal:true,maximizable:true" style=" margin-top: 5px; width:510px; height: 600px;">
      	<form id="editForm" class="ui-form" method="post">  
      		 <input class="hidden" name="id" >
      		 <div class="ui-edit">
@@ -65,7 +65,7 @@
 						</select>
 						<label>型号:</label>
 						<select class="easyui-combobox" name="goodskindid" id="formgoodskindid" style="width: 80px"></select>
-						<label>价格(元):</label>
+						<label>价格(元/斤):</label>
 						<input name="price" id="price"  type="text"  style="width: 55px">
 						<label>件数:</label>
 						<input name="nums" id="nums" type="text" style="width: 55px" disabled="disabled" >
@@ -90,7 +90,7 @@
 								&nbsp;&nbsp;
 							<label>总重:</label>
 							<label id="totalweight" >******</label> (公斤/KG)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>总价:</label>
+							<label>总价(总重*2*单价):</label>
 							<label id="totalprice">******</label>(元)
 						</div>
 					</div>
