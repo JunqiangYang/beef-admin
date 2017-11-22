@@ -71,14 +71,14 @@ jeecg.tGoodsKind = function(){
                 var value=$(this).children('option:selected').val();//这就是selected的值
 				if(parseInt(value) == 0){
 					//不定重
-                    $("#weight").attr("disabled","disabled");
+                    $("#weight").attr("readonly","readonly");
                     $("#weight").val("");
-                    $("#weightformat").removeAttr("disabled");
+                    $("#weightformat").removeAttr("readonly");
 				}else{
                     //定重
-                    $("#weightformat").attr("disabled","disabled") ;
+                    $("#weightformat").attr("readonly","readonly") ;
                     $("#weightformat").find("option[value='0']").attr("selected",true);
-                    $("#weight").removeAttr("disabled");
+                    $("#weight").removeAttr("readonly");
 				}
             }) ;
 
@@ -88,7 +88,7 @@ jeecg.tGoodsKind = function(){
                 if(parseInt(weightformat) == 1){
                     regex =/^\d{5}$/;
                 }
-                if(regex.test(str) || str.trim().length ==0){
+                if(regex.test(weightformat) || weightformat.trim().length ==0){
                     $(this).removeClass("redborder");
                 }else{
                     $(this).addClass("redborder");

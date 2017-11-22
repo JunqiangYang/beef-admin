@@ -54,7 +54,7 @@
 					</div>
 				 <div class="fitem">
 					 <label>重量格式</label>
-					 <select id="weightformat" name="weightformat" style="width: 130px" disabled="disabled" >
+					 <select id="weightformat" name="weightformat" style="width: 130px" readonly="readonly" >
 						 <option value="0">四位数(##.##)</option>
 						 <option value="1">五位数(##.###)</option>
 					 </select>
