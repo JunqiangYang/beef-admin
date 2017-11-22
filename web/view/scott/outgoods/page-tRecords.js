@@ -40,10 +40,11 @@ jeecg.outRecords = function(){
         var formatgoogskindId  = parseInt($('#formgoodskindid').combobox('getValue'));
         for (var i=0; i<goodskindlist.length  ; i++){
             var goodkind = goodskindlist[i] ;
-            if (formatgoogskindId == goodkind.id && goodkind.isfixedweight ==1 ){
+            if (parseInt(formatgoogskindId) == parseInt(goodkind.id) &&  parseInt(goodkind.isfixedweight) == 1 ){
+                total = 0 ;
                 var nums  = parseInt($('#nums').val()) ;
-                for(var j = 1 ; j < num ; j++){
-                    total+=total ;
+                for(var j = 1 ; j <= nums ; j++){
+                    total+=parseInt(arr[0]) ;
                 }
                 break ;
             }
@@ -58,17 +59,18 @@ jeecg.outRecords = function(){
         str+="";
         var goodkind = null ;
         for (var i=0; i<goodskindlist.length  ; i++){
-            goodkind = goodskindlist[i] ;
-            if (formatgoogskindId == goodkind.id ){
+            var tem = goodskindlist[i] ;
+            if (parseInt(formatgoogskindId) == parseInt(tem.id) ){
+                goodkind = tem ;
                 break ;
             }
         }
-        if (goodkind !== null || goodkind !== undefined || goodkind !== '') {
+        if (goodkind != null) {
             var arr =   str.split(",");
-            if(goodkind.isfixedweight ==1 ){
+            if(parseInt(goodkind.isfixedweight) == 1 ){
                // console.info("nums="+nums) ;
-                for(var j = 1 ; j < nums ; j++){
-                    total+=arr[0] ;
+                for(var j = 1 ; j <= parseInt(nums) ; j++){
+                    total+=parseInt(arr[0]) ;
                 }
             }else{
                 //for (let obj of arr) {
@@ -143,7 +145,7 @@ jeecg.outRecords = function(){
         var isfixedweight = 0 ;
         for (var i=0; i<goodskindlist.length  ; i++){
             var goodkind = goodskindlist[i] ;
-            console.info(goodkind);
+            //console.info(goodkind);
             if (formatgoogskindId == goodkind.id && goodkind.isfixedweight ==1 ){
                 isfixedweight = 1 ;
                 break ;
@@ -152,10 +154,10 @@ jeecg.outRecords = function(){
         if(isfixedweight != undefined && isfixedweight == 0){
             $('#nums').val(boxnum);
         }
-        console.info($('#nums').val());
+       // console.info($('#nums').val());
         $("#totalweight").html(formatWeight(sumWeight(deatils,$('#nums').val(),formatgoogskindId),weightformat)) ;
         var price = $('#price').val().trim().length==0 ? 0 : $('#price').val();
-        console.info(parseFloat(sumWeight(deatils,$('#nums').val(),formatgoogskindId))+","+parseFloat(price)) ;
+       // console.info(parseFloat(sumWeight(deatils,$('#nums').val(),formatgoogskindId))+","+parseFloat(price)) ;
         $("#totalprice").html( formatPricesss(parseFloat(sumWeight(deatils,$('#nums').val(),formatgoogskindId))*parseFloat(price)*2,weightformat))  ;
     }
 
@@ -306,10 +308,10 @@ jeecg.outRecords = function(){
                             new_4_5_div(result.data.details);
                         }
                         $("#nums").val(result.data.nums);
-                        $("#totalweight").html(formatWeight(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId),result.data.weightformat)) ;
+                        $("#totalweight").html(formatWeight(sumWeight(result.data.details,result.data.nums ,result.data.goodskindid),result.data.weightformat)) ;
                         var price = result.data.price == null ? 0 : result.data.price;
-                        console.info(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId)+","+parseFloat(price)+","+formatPricesss(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2, result.data.weightformat)) ;
-                        $("#totalprice").html( formatPricesss(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodsKindId))*parseFloat(price)*2, result.data.weightformat)) ;
+                       // console.info(sumWeight(result.data.details,result.data.nums ,result.data.goodskindid)+","+parseFloat(price)+","+formatPricesss(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodskindid))*parseFloat(price)*2, result.data.weightformat)) ;
+                        $("#totalprice").html( formatPricesss(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodskindid))*parseFloat(price)*2, result.data.weightformat)) ;
                     });
 				},
                 save:function () {
@@ -335,7 +337,8 @@ jeecg.outRecords = function(){
                     });
                     if(!check) return;
                     var total =  sum(deatils) ;
-                    var showtotal = parseInt($("#totalweight").html()) ;
+                    var showtotal = parseInt(($("#totalweight").html()+"").replace(".","")) ;
+                    console.info(total,showtotal);
                     if(showtotal != total){
                         jeecg.alert('提示',' 表单总数计算与显示异常','error');
                         return ;
@@ -378,7 +381,7 @@ jeecg.outRecords = function(){
                     },
                     {field:'weightotal',title:'总重',align:'center',sortable:true,width:150,
                         formatter:function(value,row,index){
-                            return formatWeight(sumWeight(row.details,row.nums,row.goodsKindId),row.weightformat) ;
+                            return formatWeight(sumWeight(row.details,row.nums,row.goodskindid),row.weightformat) ;
                         }
                     },
 					{field:'warehouseName',title:'仓库',align:'center',sortable:true,
