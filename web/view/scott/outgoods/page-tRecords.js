@@ -55,6 +55,7 @@ jeecg.outRecords = function(){
     // TODO 这里没准得加总价
     // 列显示哪里加总数
     var sumWeight = function (str,nums,formatgoogskindId) {
+	    console.info(str,nums,formatgoogskindId) ;
         var total = 0 ;
         str+="";
         var goodkind = null ;
@@ -71,6 +72,7 @@ jeecg.outRecords = function(){
                // console.info("nums="+nums) ;
                 for(var j = 1 ; j <= parseInt(nums) ; j++){
                     total+=parseInt(arr[0]) ;
+                    console.info(total);
                 }
             }else{
                 //for (let obj of arr) {
@@ -308,6 +310,7 @@ jeecg.outRecords = function(){
                             new_4_5_div(result.data.details);
                         }
                         $("#nums").val(result.data.nums);
+
                         $("#totalweight").html(formatWeight(sumWeight(result.data.details,result.data.nums ,result.data.goodskindid),result.data.weightformat)) ;
                         var price = result.data.price == null ? 0 : result.data.price;
                        // console.info(sumWeight(result.data.details,result.data.nums ,result.data.goodskindid)+","+parseFloat(price)+","+formatPricesss(parseFloat(sumWeight(result.data.details,result.data.nums ,result.data.goodskindid))*parseFloat(price)*2, result.data.weightformat)) ;
