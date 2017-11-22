@@ -16,7 +16,7 @@
 
 	<!-- t_goods_kind table all fields -->
 	<sql id="Base_Column_List" >
-		id,gooddskindname,price,isfixedweight,remark,weightformat,weight
+		id,gooddskindname,price,isfixedweight,remark,weightformat,weight,
 	</sql>
 
 

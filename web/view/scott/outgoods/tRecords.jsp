@@ -68,7 +68,7 @@
 						<label>价格(元/斤):</label>
 						<input name="price" id="price"  type="text"  style="width: 55px">
 						<label>件数:</label>
-						<input name="nums" id="nums" type="text" style="width: 55px"  readonly  >
+						<input name="nums" id="nums" type="text" style="width: 55px"  readonly="true" >
 
 					<%--<label>状态</label>--%>
 						<input name="status" type="hidden" value="2" >
@@ -80,6 +80,7 @@
 								<option value="0">四位数</option>
 								<option value="1">五位数</option>
 							</select>
+						&nbsp;&nbsp;&nbsp;<label>各仓库剩余件数:&nbsp;</label><label id="warehousuleft"></label>
 						<br/><br/>
 						<input name="details" id="details" type="hidden" >
 						<div id="divlistblock" style=" width: 88%; text-align: center; margin: 0 auto; "></div>

@@ -9,7 +9,7 @@ jeecg.outRecords = function(){
 
 
     /**
-     * isFixedweight   是否固定重量 0(不定),1(定重)
+     * isfixedweight   是否固定重量 0(不定),1(定重)
      * weightformat    重量格式0(##.##) 1(##.###)
      *
      */
@@ -40,7 +40,7 @@ jeecg.outRecords = function(){
         var formatgoogskindId  = parseInt($('#formgoodskindid').combobox('getValue'));
         for (var i=0; i<goodskindlist.length  ; i++){
             var goodkind = goodskindlist[i] ;
-            if (formatgoogskindId == goodkind.id && goodkind.isFixedweight ==1 ){
+            if (formatgoogskindId == goodkind.id && goodkind.isfixedweight ==1 ){
                 var nums  = parseInt($('#nums').val()) ;
                 for(var j = 1 ; j < num ; j++){
                     total+=total ;
@@ -65,9 +65,9 @@ jeecg.outRecords = function(){
         }
         if (goodkind !== null || goodkind !== undefined || goodkind !== '') {
             var arr =   str.split(",");
-            if(goodkind.isFixedweight ==1 ){
+            if(goodkind.isfixedweight ==1 ){
                // console.info("nums="+nums) ;
-                for(var j = 1 ; j < num ; j++){
+                for(var j = 1 ; j < nums ; j++){
                     total+=arr[0] ;
                 }
             }else{
@@ -118,7 +118,6 @@ jeecg.outRecords = function(){
     }
 
     var refreshtotal = function(){
-        $('#nums').val(0);
         $("#totalweight").html('') ;
         $("#totalprice").html('') ;
         var weightformat = '';
@@ -140,11 +139,24 @@ jeecg.outRecords = function(){
                 boxnum++ ;
             }
         });
-        $('#nums').val(boxnum);
-        $("#totalweight").html(formatWeight(sum(deatils),weightformat)) ;
+        var formatgoogskindId  = parseInt($('#formgoodskindid').combobox('getValue'));
+        var isfixedweight = 0 ;
+        for (var i=0; i<goodskindlist.length  ; i++){
+            var goodkind = goodskindlist[i] ;
+            console.info(goodkind);
+            if (formatgoogskindId == goodkind.id && goodkind.isfixedweight ==1 ){
+                isfixedweight = 1 ;
+                break ;
+            }
+        }
+        if(isfixedweight != undefined && isfixedweight == 0){
+            $('#nums').val(boxnum);
+        }
+        console.info($('#nums').val());
+        $("#totalweight").html(formatWeight(sumWeight(deatils,$('#nums').val(),formatgoogskindId),weightformat)) ;
         var price = $('#price').val().trim().length==0 ? 0 : $('#price').val();
-        console.info(parseFloat(sum(deatils))+","+parseFloat(price)) ;
-        $("#totalprice").html( formatPricesss(parseFloat(sum(deatils))*parseFloat(price)*2,weightformat))  ;
+        console.info(parseFloat(sumWeight(deatils,$('#nums').val(),formatgoogskindId))+","+parseFloat(price)) ;
+        $("#totalprice").html( formatPricesss(parseFloat(sumWeight(deatils,$('#nums').val(),formatgoogskindId))*parseFloat(price)*2,weightformat))  ;
     }
 
     // 创建
@@ -266,6 +278,7 @@ jeecg.outRecords = function(){
                     // 创建4行5列 矩阵框
                     new_4_5_div('');
                     refreshtotal();
+                    $("#warehousuleft").html("");
 				},
 				edit:function(){
                     $('#formpeopleid').combobox({
@@ -284,6 +297,7 @@ jeecg.outRecords = function(){
                         textField:'warehousename'
                     });
 					_box.handler.edit(function (result) {
+                        $("#warehousuleft").html("");
                         $("#remarktextarea").val($("#remark").val());
                         if(result.data.isfixedweight != undefined && result.data.isfixedweight ==1 ){
                             new_1_1_div(result.data.details);
@@ -451,10 +465,26 @@ jeecg.outRecords = function(){
                                 $("#weightformat").val(obj.weightformat) ;
                                 if( obj.isfixedweight ==0 ){
                                     new_4_5_div('');
+                                    $("#nums").val(0);
+                                    $("#nums").attr("readonly",true);
                                 }else{
                                     new_1_1_div(''+obj.weight+'');
+                                    $("#nums").attr("readonly",false);
+                                    $("#nums").removeAttr("readonly");
+                                    $("#nums").val(1);
                                 }
                                 refreshtotal();
+                                jeecg.ajaxJson(urls['msUrl']+'/warehousestat/getId.do',{goodskindid:parseInt(obj.id)},function(data){
+                                    if(data.total != null && data.total > 0 ){
+                                        var arr =  data.rows ;
+                                        var str = "" ;
+                                        for (var i=0; i<arr.length  ; i++){
+                                            var obj = arr[i] ;
+                                            str+=(obj.warehouseName+":"+obj.nums+", ")
+                                        }
+                                        $("#warehousuleft").html(str);
+                                    }
+                                });
                                 return ;
                             }
                     }
@@ -462,7 +492,9 @@ jeecg.outRecords = function(){
             });
 
             $("#price").on('input',function(e){
-                console.info("onchange");
+                refreshtotal();
+            });
+            $("#nums").on('input',function(e){
                 refreshtotal();
             });
 
