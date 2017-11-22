@@ -59,7 +59,8 @@ jeecg.tGoodsKind = function(){
 							}
 					}
 
-					]]
+					]],
+                pagination:false,
 			}
 		},
 		init:function(){

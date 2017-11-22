@@ -237,7 +237,7 @@ var YDataGrid = function(config){
 				striped: false,
 				collapsible:false,
 				remoteSort: false,
-				pagination:true,
+				pagination: ((dataGrid.pagination != null && dataGrid.pagination  == false) ? false: true),
 				rownumbers:true,
 				singleSelect:false,
 				checkOnSelect:false,

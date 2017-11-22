@@ -28,7 +28,10 @@ jeecg.tContactPerson = function(){
 								return row.phone;
 							}
 						},
-					]]
+					]],
+                pagination:false,
+
+
 			}
 		},
 		init:function(){

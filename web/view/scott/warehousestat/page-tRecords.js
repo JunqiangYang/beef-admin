@@ -25,7 +25,8 @@ jeecg.tRecords = function(){
 					]],
                     toolbar:[
 						false
-                    ]
+                    ],
+                pagination:false,
 			}
 		},
 		init:function(){

@@ -28,7 +28,8 @@ jeecg.tWarehouse = function(){
 								return row.remark;
 							}
 						},
-					]]
+					]],
+                pagination:false,
 			}
 		},
 		init:function(){
