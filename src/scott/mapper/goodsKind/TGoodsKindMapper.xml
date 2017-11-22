@@ -8,7 +8,7 @@
 		<result column="id" property="id"/>
 		<result column="gooddskindname" property="gooddskindname"/>
 		<result column="price" property="price"/>
-		<result column="isfixedweight" property="isfixedweight"/>
+		<result column="isFixedweight" property="isFixedweight"/>
 		<result column="weightformat" property="weightformat"/>
 		<result column="weight" property="weight"/>
 		<result column="remark" property="remark"/>
@@ -16,7 +16,7 @@
 
 	<!-- t_goods_kind table all fields -->
 	<sql id="Base_Column_List" >
-		id,gooddskindname,price,isfixedweight,remark,weightformat,weight,
+		id, gooddsKindName, price, isFixedweight, remark, weightformat, weight
 	</sql>
 
 
@@ -33,8 +33,8 @@
 			<if test="price != null and price != ''" >
 				and price =  #{price}
 			</if>
-			<if test="isfixedweight != null and isfixedweight != ''" >
-				and isfixedweight =  #{isfixedweight}
+			<if test="isFixedweight != null and isFixedweight != ''" >
+				and isFixedweight =  #{isFixedweight}
 			</if>
 			<if test="weightformat != null and weightformat != ''" >
 				and weightformat =  #{weightformat}
@@ -51,13 +51,13 @@
 
 	<!-- 插入记录 -->
 	<insert id="add" parameterType="Object" >
-		insert into t_goods_kind(id,gooddskindname,price,isfixedweight,remark,weightformat,weight)
-		values(#{id},#{gooddskindname},#{price},#{isfixedweight},#{remark},#{weightformat},#{weight})
+		insert into t_goods_kind(id,gooddskindname,price,isFixedweight,remark,weightformat,weight)
+		values(#{id},#{gooddskindname},#{price},#{isFixedweight},#{remark},#{weightformat},#{weight})
 	</insert>
 
 	<!-- 根据id，修改记录-->
 	<update id="update" parameterType="Object" >
-		update t_goods_kind set gooddskindname=#{gooddskindname},price=#{price},isfixedweight=#{isfixedweight},remark=#{remark},weightformat=#{weightformat},weight=#{weight}  where id=#{id}
+		update t_goods_kind set gooddskindname=#{gooddskindname},price=#{price},isFixedweight=#{isFixedweight},remark=#{remark},weightformat=#{weightformat},weight=#{weight}  where id=#{id}
 	</update>
 
 	<!-- 修改记录，只修改只不为空的字段 -->
@@ -70,8 +70,8 @@
 			<if test="price != null  ">
 				price=#{price},
 			</if>
-			<if test="isfixedweight != null  ">
-				isfixedweight=#{isfixedweight},
+			<if test="isFixedweight != null  ">
+				isFixedweight=#{isFixedweight},
 			</if>
 			<if test="remark != null  ">
 				remark=#{remark},

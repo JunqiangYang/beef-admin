@@ -9,7 +9,7 @@ jeecg.outRecords = function(){
 
 
     /**
-     * isfixedweight   是否固定重量 0(不定),1(定重)
+     * isFixedweight   是否固定重量 0(不定),1(定重)
      * weightformat    重量格式0(##.##) 1(##.###)
      *
      */
@@ -40,7 +40,7 @@ jeecg.outRecords = function(){
         var formatgoogskindId  = parseInt($('#formgoodskindid').combobox('getValue'));
         for (var i=0; i<goodskindlist.length  ; i++){
             var goodkind = goodskindlist[i] ;
-            if (parseInt(formatgoogskindId) == parseInt(goodkind.id) &&  parseInt(goodkind.isfixedweight) == 1 ){
+            if (parseInt(formatgoogskindId) == parseInt(goodkind.id) &&  parseInt(goodkind.isFixedweight) == 1 ){
                 total = 0 ;
                 var nums  = parseInt($('#nums').val()) ;
                 for(var j = 1 ; j <= nums ; j++){
@@ -67,7 +67,7 @@ jeecg.outRecords = function(){
         }
         if (goodkind != null) {
             var arr =   str.split(",");
-            if(parseInt(goodkind.isfixedweight) == 1 ){
+            if(parseInt(goodkind.isFixedweight) == 1 ){
                // console.info("nums="+nums) ;
                 for(var j = 1 ; j <= parseInt(nums) ; j++){
                     total+=parseInt(arr[0]) ;
@@ -142,16 +142,16 @@ jeecg.outRecords = function(){
             }
         });
         var formatgoogskindId  = parseInt($('#formgoodskindid').combobox('getValue'));
-        var isfixedweight = 0 ;
+        var isFixedweight = 0 ;
         for (var i=0; i<goodskindlist.length  ; i++){
             var goodkind = goodskindlist[i] ;
             //console.info(goodkind);
-            if (formatgoogskindId == goodkind.id && goodkind.isfixedweight ==1 ){
-                isfixedweight = 1 ;
+            if (formatgoogskindId == goodkind.id && goodkind.isFixedweight ==1 ){
+                isFixedweight = 1 ;
                 break ;
             }
         }
-        if(isfixedweight != undefined && isfixedweight == 0){
+        if(isFixedweight != undefined && isFixedweight == 0){
             $('#nums').val(boxnum);
         }
        // console.info($('#nums').val());
@@ -301,7 +301,7 @@ jeecg.outRecords = function(){
 					_box.handler.edit(function (result) {
                         $("#warehousuleft").html("");
                         $("#remarktextarea").val($("#remark").val());
-                        if(result.data.isfixedweight != undefined && result.data.isfixedweight ==1 ){
+                        if(result.data.isFixedweight != undefined && result.data.isFixedweight ==1 ){
                             new_1_1_div(result.data.details);
                         }else{
                             // 创建4行5列 矩阵框
@@ -464,9 +464,9 @@ jeecg.outRecords = function(){
                    // for (let obj of goodskindlist) {
                     for(var i=0; i<goodskindlist.length  ; i++){
                             var obj = goodskindlist[i] ;
-                            if(obj.isfixedweight != undefined && parseInt(obj.id) == parseInt(n) ){
+                            if(obj.isFixedweight != undefined && parseInt(obj.id) == parseInt(n) ){
                                 $("#weightformat").val(obj.weightformat) ;
-                                if( obj.isfixedweight ==0 ){
+                                if( obj.isFixedweight ==0 ){
                                     new_4_5_div('');
                                     $("#nums").val(0);
                                     $("#nums").attr("readonly",true);

@@ -141,7 +141,7 @@ where 1=1 and r.opertype=0
 	select  r.id,r.opertype,r.warehouseid,r.createtime,r.goodskindid,r.nums,r.peopleid,r.status,w.warehouseName,g.gooddsKindName
 	from t_records r,t_warehouse w ,t_goods_kind g
 	<include refid="Example_Where_Clause"/>
-	and r.warehouseId = w.id and r.goodsKindId = g.id
+	and r.warehouseId = w.id and r.goodsKindId = g.id  ORDER by r.createTime DESC
 	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
       ${pager.orderCondition}
     </if>

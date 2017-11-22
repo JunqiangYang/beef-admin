@@ -28,12 +28,12 @@ jeecg.tGoodsKind = function(){
 								return row.price;
 							}
 						},
-					{field:'isfixedweight',title:'是否固定重量',align:'center',sortable:true,
+					{field:'isFixedweight',title:'是否固定重量',align:'center',sortable:true,
 							formatter:function(value,row,index){
-                                if(row.isfixedweight == 0){
+                                if(row.isFixedweight == 0){
                                     return '不定重' ;
                                 }
-                                if(row.isfixedweight == 1){
+                                if(row.isFixedweight == 1){
                                     return '定重' ;
                                 }
 							}
@@ -67,7 +67,7 @@ jeecg.tGoodsKind = function(){
 			_box = new YDataGrid(_this.config); 
 			_box.init();
 
-            $('#isfixedweight').change(function(){
+            $('#isFixedweight').change(function(){
                 var value=$(this).children('option:selected').val();//这就是selected的值
 				if(parseInt(value) == 0){
 					//不定重
