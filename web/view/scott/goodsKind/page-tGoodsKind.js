@@ -76,7 +76,7 @@ jeecg.tGoodsKind = function(){
                     $("#weightformat").removeAttr("disabled");
 				}else{
                     //定重
-                    $("#weightformat").attr("disabled","true");
+                    $("#weightformat").attr("disabled","disabled") ;
                     $("#weightformat").find("option[value='0']").attr("selected",true);
                     $("#weight").removeAttr("disabled");
 				}

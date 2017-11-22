@@ -47,7 +47,7 @@
 					</div>
 					<div class="fitem">
 						<label>是否固定重量</label>
-						<select id="isfixedweight" name="isfixedweight" style="width: 130px" >
+						<select id="isFixedweight" name="isFixedweight" style="width: 130px" >
 							<option value="0">不定重</option>
 							<option value="1" selected="selected" >定重</option>
 						</select>
