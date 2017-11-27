@@ -98,8 +98,14 @@
   			</div>
      	</form>
   	 </div>
-	 <div id="print" >
+	 <div id="print-win" class="easyui-dialog" title="打印预览" data-options="closed:true,iconCls:'icon-save',modal:true,maximizable:true" style=" margin-top: 5px; width:900px; height: 600px;">
+		 <div id="printdivblock" >
+			<table id="printableblock">
+
+			</table>
+		 </div>
 	 </div>
-  	 <script type="text/javascript" src="<%=basePath%>/view/scott/outgoods/page-tRecords.js"></script>
+	 <script type="text/javascript" src="<%=basePath%>/view/scott/outgoods/page-tRecords.js"></script>
+	 <script type="text/javascript" src="/js/jprint/jquery.jqprint-0.3.js"></script>
   </body>
 </html>

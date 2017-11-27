@@ -167,10 +167,10 @@ jeecg.outRecords = function(){
 	var new_4_5_div = function (str) {
 	    //var str = $('#details').val();
         $("#details").val('');
+        var a = str.split(",");
 	    var arr = new Array(100);
         for(var j = 0,len=arr.length; j<len; j++) { arr[j] = ''; }
 	    if(str != null && str.trim().length != 0 ){
-            var a = str.split(",");
             for(var j = 0,len=a.length; j<len; j++) { arr[j] = a[j]; }
         }
        // console.info(arr);
@@ -409,6 +409,97 @@ jeecg.outRecords = function(){
                         handler:function(){
                             console.info("print");
                             console.info("获取需要打印数据, 打印赋值, 打印div");
+                            var printwin = $('#print-win');
+                            var btns = printwin.attr("buttons");
+                            if(!btns){
+                                //设置 保存,关闭按钮
+                                printwin.dialog({
+                                    buttons:[
+                                        {
+                                            text:'确定',
+                                            handler:function () {
+                                                $('#printdivblock').jqprint({
+                                                    debug: false,
+                                                    importCSS: true,
+                                                    printContainer: true,
+                                                    operaSupport: false
+                                                }) ;
+                                            }
+                                        },{
+                                            text:'关闭',
+                                            handler:function () {
+                                                $('#print-win').dialog('close');
+                                            }
+                                        }
+                                    ]
+                                });
+                            }
+                            jeecg.progress();
+                            jeecg.ajaxJson(urls['msUrl']+'/outgoods/getId.do',{},function(data){
+                                if(data.success != null && data.success == true ){
+                                    var entity = data.data ;
+                                    var htmlstr = "" ;
+                                        htmlstr+='<tr>';
+                                        htmlstr+='<td colspan="2"><label>仓库:</label></td><td colspan="2"><label>'+entity.warehouseName+'</label></td>';
+                                        htmlstr+='<td colspan="2"><label>型号:</label></td><td colspan="2"><label>'+entity.gooddsKindName+'</label></td>';
+                                        htmlstr+='<td colspan="2"><label>时间:</label></td><td colspan="2"><label>'+entity.createtime+'</label></td>';
+                                        htmlstr+='</tr>';
+                                        htmlstr+='<tr>';
+                                        htmlstr+='<td colspan="2"><label>买家:</label></td><td colspan="2"><label>'+entity.name+'</label></td>';
+                                        htmlstr+='<td colspan="2"><label>件数:</label></td><td colspan="2"><label>'+entity.nums+'</label></td>';
+                                        htmlstr+='<td colspan="2"><label>价格(元/斤):</label></td><td colspan="2"><label>'+entity.price+'</label></td>';
+                                        htmlstr+='</tr>';
+                                        var details = entity.details.split(",");
+                                        var arr = new Array(120);
+                                        for(var j = 0,len=arr.length; j<len; j++) { arr[j] = ''; }
+                                        var index = 0 ;
+                                        var span = 12 ;
+                                        var iter = 0 ;
+                                        var isend = false ;
+                                        for(var i = 0  ; i < 24 ; i++ ){
+                                            for(var j = 0 ; j < 5 ; j++){
+                                                if(iter < details.length ){
+                                                    arr[index] =details[iter] ;
+                                                    iter++ ;
+                                                    index+=span ;
+                                                }else{
+                                                    break ;
+                                                    isend= true ;
+                                                }
+
+                                            }
+                                            if(isend){break;}
+                                        }
+                                        for (var i=0;i<12;i++)
+                                        {
+                                            if(arr[i*12].trim() == ""){
+                                                break ;
+                                            }
+                                            htmlstr+='<tr>';
+                                            for (var j=0;j<12;j++)
+                                            {
+                                                htmlstr += '<td><label>'+arr[i*12+j]+'</label></td>' ;
+                                            }
+                                            htmlstr+='<tr>';
+                                        }
+                                        htmlstr+='<tr><td colspan="12">总重:<label id="totalweight2print">'+formatWeight(sumWeight(entity.details,entity.nums,entity.goodskindid),entity.weightformat)+'</label>(公斤/KG)</td></tr>';
+                                        htmlstr+='<tr><td colspan="12">总价:<label id="totalprice2print">'+entity.XXX+'</label>(元)</td></tr>';
+                                        htmlstr+='<tr><td colspan="12">备注: '+entity.remark+'</td></tr>';
+
+                                        $("#printableblock").html(htmlstr);
+                                        $("#printdivblock").addClass("blockdiv");
+                                        $("input[name='numinput']").addClass("blockdiv-input");
+
+                                        printwin.dialog('open');
+                                }else{
+                                    jeecg.alert('提示',data.msg,'error');
+                                }
+                                jeecg.closeProgress();
+                            });
+
+
+
+
                         }
                     }
                 ]
