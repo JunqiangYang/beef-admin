@@ -203,8 +203,8 @@ jeecg.outRecords = function(){
                 if(parseInt(weightformat) == 1){
                     regex =/^\d{5}$/;
                 }
-                console.info(e.which);
-                if(str.trim().length ==0 && e.which){
+                if(str.trim().length ==0 && parseInt(e.which) == 8){
+                    $(inputs[i-1]).focus();
                     return ;
                 }
                 if(regex.test(str)){
