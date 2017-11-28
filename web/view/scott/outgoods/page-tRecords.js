@@ -409,11 +409,11 @@ jeecg.outRecords = function(){
                             return row.nums;
                         }
                     },
-                    {field:'price',title:'价格',align:'center',sortable:true,
-                        formatter:function(value,row,index){
-                            return row.price;
-                        }
-                    },
+                    // {field:'price',title:'价格',align:'center',sortable:true,
+                    //     formatter:function(value,row,index){
+                    //         return row.price;
+                    //     }
+                    // },
                     {field:'weightotal',title:'总重',align:'center',sortable:true,width:150,
                         formatter:function(value,row,index){
                             return formatWeight(sumWeight(row.details,row.nums,row.goodskindid),row.weightformat) ;
