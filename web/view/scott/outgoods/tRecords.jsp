@@ -15,8 +15,21 @@
 		  border: 1px solid red;
 	  }
 
+	 .printdivblock{
+
+	 }
+	  .printableblock{
+		  margin-left: 5px;
+		  /*border-right:1px dashed ;*/
+	  }
+	  .printableblock tr{
+		  margin-top: 3px;
+	  }
+
 
   </style>
+
+
   <body class="easyui-layout">
  	 <!-- Search panel start -->
  	 <div class="ui-search-panel" region="north" style="height: 80px;" title="过滤条件" data-options="striped: true,collapsible:false,iconCls:'icon-search',border:false" >  
@@ -98,9 +111,10 @@
   			</div>
      	</form>
   	 </div>
-	 <div id="print-win" class="easyui-dialog" title="打印预览" data-options="closed:true,iconCls:'icon-save',modal:true,maximizable:true" style=" margin-top: 5px; width:900px; height: 600px;">
-		 <div id="printdivblock" >
-			<table id="printableblock">
+	 <div id="print-win" class="easyui-dialog" title="打印预览" data-options="closed:true,iconCls:'icon-save',modal:true,maximizable:true" style=" margin-top: 5px; width:1054px; height: 620px;">
+		 <div id="printdivblock" style=" width: 100%;text-align: left;" >
+			 <h2 style="text-align: center" >销售单</h2>
+			<table id="printableblock" style="width: 95%; margin: 10px auto">
 
 			</table>
 		 </div>
