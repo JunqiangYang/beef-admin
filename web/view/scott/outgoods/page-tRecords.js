@@ -516,7 +516,7 @@ jeecg.outRecords = function(){
                                         }
                                         htmlstr+='<tr><td colspan="12">总重:<label id="totalweight2print">'+formatWeight(sumWeight(entity.details,entity.nums,entity.goodskindid),entity.weightformat)+'</label>(公斤/KG)</td></tr>';
                                         htmlstr+='<tr><td colspan="12">总价:<label id="totalprice2print">'+formatPricesss(parseFloat(sumWeight(entity.details,entity.nums ,entity.goodskindid))*parseFloat(entity.price)*2, entity.weightformat)+'</label>(元)</td></tr>';
-                                        htmlstr+='<tr><td colspan="12" style="border-bottom:1px solid">备注: '+entity.remark+'</td></tr>';
+                                        htmlstr+='<tr><td colspan="6" style="border-bottom:1px solid">备注: '+entity.remark+'</td><td colspan="6" style="border-bottom:1px solid">客户签字: </td></tr>';
 
                                         $("#printableblock").html(htmlstr);
                                         printwin.dialog('open');
